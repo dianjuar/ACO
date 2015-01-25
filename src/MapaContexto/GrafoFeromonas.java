@@ -1,8 +1,7 @@
 package MapaContexto;
 
 import ACO.CalculosACO;
-import Agentes.Agente;
-import Agentes.AgenteVirtual;
+import AgenteVirtual.AgenteVirtual;
 import static MapaContexto.Mapa.longitudArcoHorizontal;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -127,27 +126,27 @@ public class GrafoFeromonas //extends Thread
         {
             case arcoHorizontal:
                 if(a.x < b.x)
-                    return Agente.este;
+                    return AgenteVirtual.este;
                 else
-                    return Agente.oeste;
+                    return AgenteVirtual.oeste;
                 
             case arcoVertical:
                 if(a.y < b.y)
-                    return Agente.sur;
+                    return AgenteVirtual.sur;
                 else
-                    return Agente.norte;
+                    return AgenteVirtual.norte;
                 
             case arcoDiagonalPositivo:
                 if(a.x < b.x)
-                    return Agente.noreste;
+                    return AgenteVirtual.noreste;
                 else
-                    return Agente.suroeste;
+                    return AgenteVirtual.suroeste;
                 
             case arcoDiagonalNegativo:
                 if(a.x < b.x)
-                    return Agente.sureste;
+                    return AgenteVirtual.sureste;
                 else
-                    return Agente.noroeste;
+                    return AgenteVirtual.noroeste;
             default:
                 return -1;
         }

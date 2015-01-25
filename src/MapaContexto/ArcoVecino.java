@@ -1,6 +1,6 @@
 package MapaContexto;
 
-import Agentes.Agente;
+import AgenteVirtual.AgenteVirtual;
 
 public class ArcoVecino 
 {
@@ -16,28 +16,28 @@ public class ArcoVecino
         
         switch (dondeQueda)
         {
-            case Agente.norte:
+            case AgenteVirtual.norte:
                 stringDondeQueda = "norte";
             break;
-            case Agente.sur:
+            case AgenteVirtual.sur:
                 stringDondeQueda = "sur";
             break;
-            case Agente.este:
+            case AgenteVirtual.este:
                 stringDondeQueda = "este";
             break;
-            case Agente.oeste:
+            case AgenteVirtual.oeste:
                 stringDondeQueda = "oeste";
             break;
-            case Agente.noreste:
+            case AgenteVirtual.noreste:
                 stringDondeQueda = "noreste";
             break;
-            case Agente.noroeste:
+            case AgenteVirtual.noroeste:
                 stringDondeQueda = "noroeste";
             break;
-            case Agente.sureste:
+            case AgenteVirtual.sureste:
                 stringDondeQueda = "sureste";
             break;
-            case Agente.suroeste:
+            case AgenteVirtual.suroeste:
                 stringDondeQueda = "suroeste";
             break;
             default:
