@@ -2,8 +2,7 @@ package main;
 
 //-Dorg.lwjgl.opengl.Display.allowSoftwareOpenGL=true
 
-import Agentes.AgenteFisico;
-import Agentes.AgenteVirtual;
+import AgenteVirtual.AgenteVirtual;
 import MapaContexto.Mapa;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -651,8 +650,6 @@ public class FormRobots extends javax.swing.JFrame
     
     private void cargarVariables()
     {
-        AgenteFisico.velocidad = 
-                sliderToFloat(SliderVelocidadVirtual, LabelVelocidadAgenteFisico,convertaVelicidadAF);
         AgenteVirtual.velocidad =
                         sliderToFloat(SliderVelocidadVirtual, LabelVelocidadAgenteVirtual1, convertaVelicidadAV);
         ACO.VariablesACO.TasaDeEvaporacionFeromona = 
@@ -674,8 +671,7 @@ public class FormRobots extends javax.swing.JFrame
     }
     
     private void SliderSliderVelocidadFisicoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderSliderVelocidadFisicoStateChanged
-        AgenteFisico.velocidad = 
-                sliderToFloat(SliderVelocidadVirtual, LabelVelocidadAgenteFisico, convertaVelicidadAF);
+        
     }//GEN-LAST:event_SliderSliderVelocidadFisicoStateChanged
     
     private void SliderVelocidadVirtualStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderVelocidadVirtualStateChanged

@@ -2,7 +2,7 @@ package main;
 
 //-Dorg.lwjgl.opengl.Display.allowSoftwareOpenGL=true
 
-import Agentes.AgenteVirtual;
+import AgenteVirtual.AgenteVirtual;
 import MapaContexto.Mapa;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
