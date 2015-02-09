@@ -36,6 +36,7 @@ public abstract class DataRecibe extends Thread
         try 
         {
             socket = Ssocket.accept();
+            System.out.println("Conectado");
         } 
         catch (IOException ex) 
         {
