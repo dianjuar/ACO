@@ -11,6 +11,6 @@ package Networking;
  */
 public class Puertos 
 {
-    public static int mapaRecibe = 6666;
+    public static int Recibe_sistemaVisionAritificial = 6666;
     
 }

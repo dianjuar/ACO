@@ -1,18 +1,18 @@
 package main;
 
-import Networking.ResepcionMapa;
+import Networking.ResepcionDatosVisionArtificial;
 
 
 public class InicioRobots extends javax.swing.JFrame 
 {
-    private ResepcionMapa resMapa;
+    private ResepcionDatosVisionArtificial resMapa;
 
     
     public InicioRobots() 
     {
         initComponents();
         
-        resMapa = new ResepcionMapa(label_paso1);
+        resMapa = new ResepcionDatosVisionArtificial(label_paso1);
         resMapa.start();
     }
 

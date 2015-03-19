@@ -16,9 +16,11 @@ public abstract class DataRecibe extends Thread
     
     private boolean msjImportante;
     private String MsjDefault_test;
-
+    protected String Msjdivisor;
+    
     public DataRecibe(int puerto, String nombreConexion) 
     {
+        Msjdivisor = "-";
         MsjDefault_test = "test";
         msjImportante = false;
         
@@ -57,8 +59,11 @@ public abstract class DataRecibe extends Thread
                 int numberOfBytes = in.read(bytesReaded);
                 msj = new String(bytesReaded,0, numberOfBytes);
 
-                System.out.println(numberOfBytes);
-
+                System.out.println("*******************");
+                System.out.println("String recibido...");
+                System.out.println(msj);
+                System.out.println("*******************");
+                
                 if(msj.compareToIgnoreCase( MsjDefault_test )!=0)
                 {
                     msjImportante=true;
