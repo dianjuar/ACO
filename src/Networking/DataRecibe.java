@@ -2,7 +2,6 @@ package Networking;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import static java.lang.System.in;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -14,6 +13,7 @@ public abstract class DataRecibe extends Thread
     protected ServerSocket Ssocket;
     protected Socket socket;
     protected String nombreConexion;
+    protected boolean pararHilo;
     
     protected static final String Msjdivisor = "-";
     protected static final String MsjConnect = "connect";
@@ -23,6 +23,7 @@ public abstract class DataRecibe extends Thread
     
     public DataRecibe(int puerto, String nombreConexion) 
     {        
+        pararHilo = false;
         this.puerto = puerto;
         this.nombreConexion = nombreConexion;
         
@@ -37,9 +38,20 @@ public abstract class DataRecibe extends Thread
         
     }
     
+    public void pararHilo()
+    {
+        pararHilo = true;
+    }
+    
+    public void iniciarHilo()
+    {
+        pararHilo = false;
+        start();
+    }
+    
     public void cerrarConexion()
     {
-        stop();
+        pararHilo();
         
         try 
         {
@@ -68,7 +80,7 @@ public abstract class DataRecibe extends Thread
         }
         System.out.println("Conectado");
         
-        for(;;)
+        while(!pararHilo)
         {
             try 
             {                
@@ -91,9 +103,7 @@ public abstract class DataRecibe extends Thread
                     in.close();
                     socket.close();
                     socket = Ssocket.accept();
-                }
-                    
-                
+                } 
             }
             catch (IOException ex)
             {                

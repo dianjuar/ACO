@@ -13,7 +13,7 @@ public class InicioRobots extends javax.swing.JFrame
         initComponents();
         
         resMapa = new ResepcionDatosVisionArtificial(label_paso1);
-        resMapa.start();
+        resMapa.iniciarHilo();
     }
 
     
