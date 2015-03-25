@@ -2,6 +2,7 @@ package Networking;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import static java.lang.System.in;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -14,16 +15,14 @@ public abstract class DataRecibe extends Thread
     protected Socket socket;
     protected String nombreConexion;
     
-    private boolean msjImportante;
-    private String MsjDefault_test;
-    protected String Msjdivisor;
+    protected static final String Msjdivisor = "-";
+    protected static final String MsjConnect = "connect";
+    protected static final String MsjDefault_test ="test";
+    
+    private  DataInputStream in;
     
     public DataRecibe(int puerto, String nombreConexion) 
-    {
-        Msjdivisor = "-";
-        MsjDefault_test = "test";
-        msjImportante = false;
-        
+    {        
         this.puerto = puerto;
         this.nombreConexion = nombreConexion;
         
@@ -38,20 +37,41 @@ public abstract class DataRecibe extends Thread
         
     }
     
+    public void cerrarConexion()
+    {
+        stop();
+        
+        try 
+        {
+            in.close();
+            socket.close();
+        } 
+        catch (IOException ex) 
+        {
+            Logger.getLogger(DataRecibe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void run()
     {
         System.out.println("Esperando conexión entrante por el puerto "+puerto+". Conexion de "+nombreConexion);
         String msj = null;
+        System.out.println("Esperando Conexion...");
         
-        while(!msjImportante)
+        try 
         {
-            DataInputStream in;
+            socket = Ssocket.accept();
+        } 
+        catch (IOException ex) 
+        {
+            Logger.getLogger(DataRecibe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Conectado");
+        
+        for(;;)
+        {
             try 
-            {
-                System.out.println("Esperando Conexion...");
-                socket = Ssocket.accept();
-                System.out.println("Conectado");
-                
+            {                
                 in = new DataInputStream(socket.getInputStream());
                 
                 byte bytesReaded[] = new byte[65535];
@@ -65,19 +85,21 @@ public abstract class DataRecibe extends Thread
                 System.out.println("*******************");
                 
                 if(msj.compareToIgnoreCase( MsjDefault_test )!=0)
+                    AnalizadorDeMensajes(msj);
+                else
                 {
-                    msjImportante=true;
                     in.close();
                     socket.close();
-                }                
+                    socket = Ssocket.accept();
+                }
+                    
+                
             }
             catch (IOException ex)
             {                
                 Logger.getLogger(DataRecibe.class.getName()).log(Level.SEVERE, null, ex);
             } 
         }
-        
-        AnalizadorDeMensajes(msj);
     }
     
     public abstract void AnalizadorDeMensajes(String msj);

@@ -18,15 +18,12 @@ public class ResepcionDatosVisionArtificial extends DataRecibe
     private float distanciaEntreCuadros;
     private JLabel etapa;
     
-    private String Prefijo_Mat;
-    private String Prefijo_Dist;
+    private static final String Prefijo_Mat = "Mat";
+    private static final String Prefijo_Dist = "Dist";
     
     public ResepcionDatosVisionArtificial(JLabel etapa) 
     {
         super(Puertos.Recibe_sistemaVisionAritificial, "Recepción del mapa y distancia entre cuadros por parte del modulo de visión artificial");
-        
-        Prefijo_Dist = "Dist";
-        Prefijo_Mat = "Mat";
         
         this.etapa = etapa;
     }
@@ -48,6 +45,8 @@ public class ResepcionDatosVisionArtificial extends DataRecibe
             Mat = vec[1].split(Prefijo_Mat)[1];
             dist = vec[0].split(Prefijo_Dist)[1];
         }
+        
+        cerrarConexion();
         
         construir_IntMat(Mat);
         distanciaEntreCuadros = Float.valueOf(dist);
