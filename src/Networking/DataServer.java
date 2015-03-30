@@ -1,6 +1,5 @@
 package Networking;
 
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -9,23 +8,23 @@ import java.util.logging.Logger;
 
 public abstract class DataServer extends Thread
 {
-    protected int puerto;
-    protected ServerSocket Ssocket;
-    protected Socket socket;
-    protected String nombreConexion;
-    protected boolean pararHilo;
+    private int puerto;
+    private ServerSocket Ssocket;
+    private Socket socket;
     
-    protected static final String Msjdivisor = "-";
-    protected static final String MsjConnect = "connect";
-    protected static final String MsjDefault_test ="test";
+    private DataRecibe D_r;
+    private DataSend D_s;
     
-    private  DataInputStream in;
+    private String nombreConexion;
+    private boolean pararHilo;
+    
     
     public DataServer(int puerto, String nombreConexion) 
     {        
-        pararHilo = false;
-        this.puerto = puerto;
+        this.puerto = puerto; 
         this.nombreConexion = nombreConexion;
+        
+        pararHilo = false;
         
         try 
         {
@@ -36,82 +35,69 @@ public abstract class DataServer extends Thread
             Logger.getLogger(DataServer.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        start();
     }
     
     public void pararHilo()
     {
         pararHilo = true;
+        cerrarConexioServer();
     }
     
-    public void iniciarHilo()
-    {
-        pararHilo = false;
-        start();
-    }
-    
-    public void cerrarConexion()
-    {
-        pararHilo();
-        
+    public void cerrarConexioServer()
+    {   
         try 
         {
-            in.close();
+            D_r.cerrarConexion();
+            D_s.cerrarConexion();
             socket.close();
         } 
         catch (IOException ex) 
         {
             Logger.getLogger(DataServer.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        this.resume();
     }
     
     public void run()
     {
-        System.out.println("Esperando conexión entrante por el puerto "+puerto+". Conexion de "+nombreConexion);
-        String msj = null;
-        System.out.println("Esperando Conexion...");
-        
-        try 
-        {
-            socket = Ssocket.accept();
-        } 
-        catch (IOException ex) 
-        {
-            Logger.getLogger(DataServer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("Conectado");
-        
         while(!pararHilo)
         {
+            System.out.println("Esperando conexión entrante por el puerto "+puerto+". Conexion de "+nombreConexion);
+            System.out.println("Esperando Conexion...");
+            
             try 
-            {                
-                in = new DataInputStream(socket.getInputStream());
-                
-                byte bytesReaded[] = new byte[65535];
+            {
+                socket = Ssocket.accept();
 
-                int numberOfBytes = in.read(bytesReaded);
-                msj = new String(bytesReaded,0, numberOfBytes);
+                System.out.println("Conectado");
 
-                System.out.println("*******************");
-                System.out.println("String recibido...");
-                System.out.println(msj);
-                System.out.println("*******************");
-                
-                if(msj.compareToIgnoreCase( MsjDefault_test )!=0)
-                    AnalizadorDeMensajes(msj);
-                else
-                {
-                    in.close();
-                    socket.close();
-                    socket = Ssocket.accept();
-                } 
-            }
-            catch (IOException ex)
-            {                
-                Logger.getLogger(DataServer.class.getName()).log(Level.SEVERE, null, ex);
+                D_s = new DataSend(socket);
+                D_r = new DataRecibe(socket)
+                {  
+                    @Override
+                    public void AnalizadorDeMensajes(String msj) 
+                    {
+                        if( msj.equalsIgnoreCase( Encabezado_Mensajes.Msj_cerrar ) )
+                            cerrarConexioServer();
+                        else
+                            AnalizadorDeMensajesSERVER(msj);
+                    }
+                };
             } 
+            catch (IOException ex) 
+            {
+                Logger.getLogger(DataServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        this.suspend();
         }
+        
+        System.out.println("mori");
+        
     }
     
-    public abstract void AnalizadorDeMensajes(String msj);
+    public abstract void AnalizadorDeMensajesSERVER(String msj);
     
 }

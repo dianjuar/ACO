@@ -5,6 +5,7 @@
  */
 package Networking;
 
+import com.sun.org.apache.bcel.internal.generic.DADD;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -26,12 +27,12 @@ public class ResepcionDatosVisionArtificial extends DataServer
         super(Puertos.Recibe_sistemaVisionAritificial, "Recepción del mapa y distancia entre cuadros por parte del modulo de visión artificial");
         
         this.etapa = etapa;
-    }
-
+    } 
+   
     @Override
-    public void AnalizadorDeMensajes(String msj) 
+    public void AnalizadorDeMensajesSERVER(String msj) 
     {
-        String vec[] = msj.split( Msjdivisor );
+        String vec[] = msj.split( Encabezado_Mensajes.Msj_divisor );
         
         String Mat,dist;
         
@@ -46,7 +47,7 @@ public class ResepcionDatosVisionArtificial extends DataServer
             dist = vec[0].split(Prefijo_Dist)[1];
         }
         
-        cerrarConexion();
+        cerrarConexioServer();
         
         construir_IntMat(Mat);
         distanciaEntreCuadros = Float.valueOf(dist);
@@ -56,9 +57,8 @@ public class ResepcionDatosVisionArtificial extends DataServer
         System.out.println(distanciaEntreCuadros);
           
         etapa.setIcon( new ImageIcon("../../../src/Media/Img/cargado.png") );
-    }   
-    
-    
+    }
+
     private void construir_IntMat(String sMat)
     {
         String fila[],columna[];
