@@ -12,7 +12,7 @@ import javax.swing.JLabel;
  *
  * @author diego_juliao
  */
-public class ResepcionDatosVisionArtificial extends DataRecibe
+public class ResepcionDatosVisionArtificial extends DataServer
 {
     private int INT_mat[][];
     private float distanciaEntreCuadros;

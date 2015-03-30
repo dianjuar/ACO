@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class DataRecibe extends Thread
+public abstract class DataServer extends Thread
 {
     protected int puerto;
     protected ServerSocket Ssocket;
@@ -21,7 +21,7 @@ public abstract class DataRecibe extends Thread
     
     private  DataInputStream in;
     
-    public DataRecibe(int puerto, String nombreConexion) 
+    public DataServer(int puerto, String nombreConexion) 
     {        
         pararHilo = false;
         this.puerto = puerto;
@@ -33,7 +33,7 @@ public abstract class DataRecibe extends Thread
         } 
         catch (IOException ex) 
         {
-            Logger.getLogger(DataRecibe.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DataServer.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -60,7 +60,7 @@ public abstract class DataRecibe extends Thread
         } 
         catch (IOException ex) 
         {
-            Logger.getLogger(DataRecibe.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DataServer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -76,7 +76,7 @@ public abstract class DataRecibe extends Thread
         } 
         catch (IOException ex) 
         {
-            Logger.getLogger(DataRecibe.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DataServer.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("Conectado");
         
@@ -107,7 +107,7 @@ public abstract class DataRecibe extends Thread
             }
             catch (IOException ex)
             {                
-                Logger.getLogger(DataRecibe.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DataServer.class.getName()).log(Level.SEVERE, null, ex);
             } 
         }
     }
