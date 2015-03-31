@@ -60,6 +60,11 @@ public class index extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -168,6 +173,8 @@ public class index extends javax.swing.JFrame {
         else
             radio_Simulacion.setSelected(true);
         
+        repaint();
+        
         
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
@@ -178,6 +185,7 @@ public class index extends javax.swing.JFrame {
         else
             jTabbedPane1.setSelectedIndex(0);
         
+         repaint();        
     }//GEN-LAST:event_radio_SimulacionStateChanged
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -186,8 +194,24 @@ public class index extends javax.swing.JFrame {
         if(radio_Simulacion.isSelected())                 
             new FormSimulacion().setVisible(true);        
         else
-            new FormRobots().setVisible(true);
+            new InicioRobots().setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       this.dispose();
+       
+       if(radio_Robots.isSelected())
+       {
+           new InicioRobots().setVisible(true);
+       }
+       else
+       {
+           new FormSimulacion().setVisible(true);
+       }
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Networking;
+package Networking.base;
 
 /**
  *
@@ -12,5 +12,6 @@ package Networking;
 public class Puertos 
 {
     public static int Recibe_sistemaVisionAritificial = 6666;
+    public static int Recibe_SMA = 6668;
     
 }

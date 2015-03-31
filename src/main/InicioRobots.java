@@ -1,18 +1,34 @@
 package main;
 
-import Networking.ResepcionDatosVisionArtificial;
+import Networking.*;
+import Networking.base.Puertos;
 
 
 public class InicioRobots extends javax.swing.JFrame 
 {
-    private ResepcionDatosVisionArtificial resMapa;
+    private ResepcionDatos_VisionArtificial resMapa;
+    private Connect_SMA cSMA;
+    public static int NfasesCompletadas;
 
     
-    public InicioRobots() 
+    public InicioRobots()
     {
         initComponents();
         
-        resMapa = new ResepcionDatosVisionArtificial(label_paso1);
+        NfasesCompletadas=0;
+        
+        resMapa = new ResepcionDatos_VisionArtificial(label_paso1,this);
+        cSMA = new Connect_SMA( label_paso2, this);
+    }
+    
+    public void faseCompletada()
+    {
+        NfasesCompletadas++;
+        
+        if( NfasesCompletadas == 2)
+        {
+            
+        }
     }
 
     
@@ -39,9 +55,9 @@ public class InicioRobots extends javax.swing.JFrame
         jLabel2.setFont(new java.awt.Font("Ubuntu", 0, 22)); // NOI18N
         jLabel2.setText("Esperando Parámetros del Módulo de Agentes Físicos");
 
-        label_paso1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Img/flecha.png"))); // NOI18N
+        label_paso1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Img/connecting45x45.gif"))); // NOI18N
 
-        label_paso2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Img/sincargar.png"))); // NOI18N
+        label_paso2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Img/connecting45x45.gif"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,39 +93,7 @@ public class InicioRobots extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InicioRobots.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InicioRobots.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InicioRobots.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InicioRobots.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InicioRobots().setVisible(true);
-            }
-        });
-    }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
