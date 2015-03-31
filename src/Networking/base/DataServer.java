@@ -1,5 +1,8 @@
-package Networking;
+package Networking.base;
 
+import Networking.base.DataRecibe;
+import Networking.base.DataSend;
+import Networking.base.Encabezado_Mensajes;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;

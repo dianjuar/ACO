@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Networking;
+package Networking.base;
 
 /**
  *
@@ -12,6 +12,16 @@ package Networking;
 public class Encabezado_Mensajes 
 {
     public static final String Msj_divisor = "-";
+        public static final String Msj_divisor_2 = ".";        
     public static final String Msj_cerrar = "close";
-    public static final String Msj_conectado = "connect";
+    public static final String Msj_conectado = "connect";    
+    public static final String Msj_PInicio_SMAtoACO = "iniSMA2ACO";
+        public static final String Msj_PInicio_SMAtoACO_HowMany = "HowMany";
+        public static final String Msj_PInicio_SMAtoACO_VelAct = "VelAct";
+        public static final String Msj_PInicio_SMAtoACO_VelMax = "VelMax";
+
+
+
+    
+    
 }
