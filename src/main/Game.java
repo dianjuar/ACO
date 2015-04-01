@@ -27,7 +27,7 @@ public static Mapa mapa;
                         
         this.width = width;
         
-        if(isEnEsperaRobots)
+        if(!isEnEsperaRobots)
             this.GameEnEspera= new EnEsperaRobots();
         else
             this.GameEnEspera = new EnEsperaSimulacion();

@@ -11,7 +11,7 @@ package Networking.base;
  */
 public class Puertos 
 {
-    public static int Recibe_sistemaVisionAritificial = 6666;
-    public static int Recibe_SMA = 6668;
+    public static int Recibe_sistemaVisionAritificial = 5000;
+    public static int Recibe_SMA = 5001;
     
 }

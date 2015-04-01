@@ -8,6 +8,7 @@ package Networking;
 import Networking.base.DataServer;
 import Networking.base.Encabezado_Mensajes;
 import Networking.base.Puertos;
+//import Networking.base.Puertos;
 import javax.swing.JLabel;
 import main.InicioRobots;
 
@@ -24,7 +25,16 @@ public class ResepcionDatos_VisionArtificial extends DataServer
     private static final String Prefijo_Mat = "Mat";
     private static final String Prefijo_Dist = "Dist";
     
-    InicioRobots i;
+    private InicioRobots i;
+
+    public int[][] getINT_mat() {
+        return INT_mat;
+    }
+
+    public float getDistanciaEntreCuadros() {
+        return distanciaEntreCuadros;
+    }
+    
     
     
     public ResepcionDatos_VisionArtificial(JLabel etapa, InicioRobots i) 

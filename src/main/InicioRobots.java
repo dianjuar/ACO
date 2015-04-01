@@ -7,7 +7,7 @@ import Networking.base.Puertos;
 public class InicioRobots extends javax.swing.JFrame 
 {
     private ResepcionDatos_VisionArtificial resMapa;
-    private Connect_SMA cSMA;
+    private Conexion_SMA cSMA;
     public static int NfasesCompletadas;
 
     
@@ -18,7 +18,7 @@ public class InicioRobots extends javax.swing.JFrame
         NfasesCompletadas=0;
         
         resMapa = new ResepcionDatos_VisionArtificial(label_paso1,this);
-        cSMA = new Connect_SMA( label_paso2, this);
+        cSMA = new Conexion_SMA( label_paso2, this);
     }
     
     public void faseCompletada()
@@ -27,7 +27,8 @@ public class InicioRobots extends javax.swing.JFrame
         
         if( NfasesCompletadas == 2)
         {
-            
+            this.dispose();
+            new FormRobots( cSMA.getNagentes() , cSMA.getNagentes(), resMapa.getDistanciaEntreCuadros(), resMapa.getINT_mat()  ).setVisible(true);
         }
     }
 
