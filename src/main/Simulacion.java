@@ -1,6 +1,6 @@
 package main;
 
-import AgenteVirtual.AgenteVirtual;
+import Agentes.AgenteVirtual;
 import MapaContexto.GrafoFeromonas;
 import MapaContexto.ArcoGrafoFeromona;
 import MapaContexto.ArcoVecino;

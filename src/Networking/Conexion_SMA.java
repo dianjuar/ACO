@@ -59,6 +59,12 @@ public class Conexion_SMA extends DataServer
             Tools.GestionLabels.CambiarLabel_correcto25x25(estado);
             i.faseCompletada();
         }
+        else if( encabezado.equals( Encabezado_Mensajes.Msj_nextStep ) )
+        {
+            //Robotid + Encabezado_Mensajes.Msj_divisor_2 + posActual + Encabezado_Mensajes.Msj_divisor_2 instanceof + horientacion;
+            
+            
+        }
         
         
     }

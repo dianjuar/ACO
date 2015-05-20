@@ -1,5 +1,5 @@
 
-package AgenteVirtual;
+package Agentes;
 
 
 public class Movimiento {

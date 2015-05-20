@@ -1,6 +1,6 @@
 package MapaContexto;
 
-import AgenteVirtual.AgenteVirtual;
+import Agentes.AgenteVirtual;
 
 public class ArcoVecino 
 {

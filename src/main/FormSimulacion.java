@@ -2,7 +2,7 @@ package main;
 
 //-Dorg.lwjgl.opengl.Display.allowSoftwareOpenGL=true
 
-import AgenteVirtual.AgenteVirtual;
+import Agentes.AgenteVirtual;
 import MapaContexto.Mapa;
 import java.io.BufferedReader;
 import java.io.File;
@@ -657,7 +657,7 @@ public class FormSimulacion extends javax.swing.JFrame
                 aVirtual = new AgenteVirtual[numeroDeAgentes];
 
                 for (int i = 0; i < aVirtual.length; i++)              
-                   aVirtual[i] = new AgenteVirtual(i, AgenteVirtual.velocidad, Mapa.cuadroInicial);
+                   aVirtual[i] = new AgenteVirtual(i, AgenteVirtual.velocidad, Mapa.cuadroInicial,-1);
 
 
                 simulacion.getGameSimulacion().setaVirtual(aVirtual);

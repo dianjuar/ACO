@@ -2,7 +2,7 @@ package main;
 
 //-Dorg.lwjgl.opengl.Display.allowSoftwareOpenGL=true
 
-import AgenteVirtual.AgenteVirtual;
+import Agentes.AgenteVirtual;
 import MapaContexto.Mapa;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -702,7 +702,7 @@ public class FormRobots extends javax.swing.JFrame
               aVirtual = new AgenteVirtual[numeroDeAgentes];
               
              for (int i = 0; i < aVirtual.length; i++)              
-                aVirtual[i] = new AgenteVirtual(i, AgenteVirtual.velocidad, Mapa.cuadroInicial);
+                aVirtual[i] = new AgenteVirtual(i, AgenteVirtual.velocidad, Mapa.cuadroInicial,-1);
              
             
              simulacion.getGameSimulacion().setaVirtual(aVirtual);

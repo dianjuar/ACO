@@ -1,7 +1,7 @@
 package MapaContexto;
 
 import ACO.CalculosACO;
-import AgenteVirtual.AgenteVirtual;
+import Agentes.AgenteVirtual;
 import static MapaContexto.Mapa.longitudArcoHorizontal;
 import java.awt.Point;
 import java.util.ArrayList;
