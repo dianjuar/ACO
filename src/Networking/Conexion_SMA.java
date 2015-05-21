@@ -5,11 +5,14 @@
  */
 package Networking;
 
+import Agentes.AgenteFisico;
 import Networking.base.DataServer;
 import Networking.base.Encabezado_Mensajes;
 import Networking.base.Puertos;
+import java.awt.Robot;
 import main.InicioRobots;
 import javax.swing.JLabel;
+import main.FormRobots;
 
 /**
  *
@@ -61,12 +64,44 @@ public class Conexion_SMA extends DataServer
         }
         else if( encabezado.equals( Encabezado_Mensajes.Msj_nextStep ) )
         {
-            //Robotid + Encabezado_Mensajes.Msj_divisor_2 + posActual + Encabezado_Mensajes.Msj_divisor_2 instanceof + horientacion;
+            /*Encabezado_Mensajes.Msj_nextStep + Encabezado_Mensajes.Msj_divisor + 
+                robotID;*/
             
+            int robotID = Integer.valueOf( cuerpo );
             
+            if( isAgenteNuevo(robotID) )
+                FormRobots.aFisico.add( new AgenteFisico( robotID, this ) );
+            
+            calcularNuevosMovimientos(robotID);
         }
+    }
+    
+    private void calcularNuevosMovimientos(int robotID)
+    {
+        for (AgenteFisico aFisico : FormRobots.aFisico) 
+            if (aFisico.getIdAgente() == robotID) 
+            {
+                aFisico.Avanzar();
+                //dibujar
+                aFisico.EnviarNuevaDireccion();
+            }
+    }
+    
+    public void enviarNuevaDireccion(int ID, int mirada, float distancia)
+    {
+        String sms = Encabezado_Mensajes.Msj_nextStep + Encabezado_Mensajes.Msj_divisor+
+                ID + Encabezado_Mensajes.Msj_divisor_2 + mirada + Encabezado_Mensajes.Msj_divisor_2 + distancia;
         
+        D_s.enviar(sms);
+    }
+    
+    private boolean isAgenteNuevo(int ID)
+    {
+        for (AgenteFisico aFisico : FormRobots.aFisico) 
+            if (aFisico.getIdAgente() == ID) 
+                return false;
         
+        return true;
     }
 
     public int getNagentes() {

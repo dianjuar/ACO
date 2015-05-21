@@ -633,7 +633,6 @@ public class FormSimulacion extends javax.swing.JFrame
             //Se detubo la simulacion                   
             simulacion.enterState(Game.STATE_EnEspera);
             BotonEmpezarSimulacion.setIcon(play);
-            
         }
         else
         {
@@ -657,7 +656,7 @@ public class FormSimulacion extends javax.swing.JFrame
                 aVirtual = new AgenteVirtual[numeroDeAgentes];
 
                 for (int i = 0; i < aVirtual.length; i++)              
-                   aVirtual[i] = new AgenteVirtual(i, AgenteVirtual.velocidad, Mapa.cuadroInicial,-1);
+                   aVirtual[i] = new AgenteVirtual(i, Mapa.cuadroInicial, -1, AgenteVirtual.velocidad);
 
 
                 simulacion.getGameSimulacion().setaVirtual(aVirtual);

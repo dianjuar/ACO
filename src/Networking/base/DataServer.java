@@ -16,7 +16,7 @@ public abstract class DataServer extends Thread
     private Socket socket;
     
     private DataRecibe D_r;
-    private DataSend D_s;
+    protected DataSend D_s;
     
     private String nombreConexion;
     private boolean pararHilo;

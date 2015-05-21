@@ -5,20 +5,24 @@
  */
 package Agentes;
 
-import static Agentes.AgenteVirtual.girar180;
+import static Agentes.AgenteVirtual.velocidad;
 import MapaContexto.ArcoGrafoFeromona;
 import MapaContexto.ArcoVecino;
 import MapaContexto.CuadroMapa;
 import MapaContexto.Mapa;
 import java.util.ArrayList;
 import main.Game;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
+import org.newdawn.slick.state.StateBasedGame;
 
 /**
  *
  * @author diego_juliao
  */
-public class Agente 
+public abstract class Agente 
 {
     public static final int norte=0;
     public static final int noreste=1;
@@ -29,25 +33,28 @@ public class Agente
     public static final int oeste=6;
     public static final int noroeste=7;
     
-    protected static final int rangoDeVision = 5;
-    
     protected int idAgente;
-    protected boolean estoyBuscandoLaLlegada;
-    
+    protected static final int rangoDeVision = 5;
     protected int mirada;
     
     protected final ArrayList<ArcoGrafoFeromona> arcosVisitados;
     
-   protected CuadroMapa posActual;
-   
-   protected Mapa mapa;
-   
-   
-   protected Point posCanvas;
+    protected CuadroMapa posActual;
+    protected Mapa mapa;
 
-    
-    public Agente(int ID, CuadroMapa posInicial, int mirada)
+    protected float acumDist;
+    protected Point posCanvas;
+
+    protected boolean estoyBuscandoLaLlegada;
+
+    public Agente(int ID)
     {
+        this.posActual = Mapa.cuadroInicial;
+        this.idAgente = ID;
+        this.mirada = -1;
+        this.mapa = Game.mapa;
+        
+        acumDist = 0;
         
         this.posCanvas = new Point(Game.imgResized*posActual.getX(), 
                                    Game.imgResized*posActual.getY());
@@ -56,12 +63,6 @@ public class Agente
         arcosVisitados = new ArrayList<>();
         
         estoyBuscandoLaLlegada = true;
-        this.posActual = posInicial;
-        
-        this.idAgente = ID;
-        this.mirada = mirada;
-        
-        this.mapa = Game.mapa;
     }
     
     protected float anguloDeVision()
@@ -74,27 +75,88 @@ public class Agente
         return mirada % 2 == 0;
     }
     
-    
-    
-     protected int ValidarCampoDeVision(int posibleVision)
-   {
+    protected int ValidarCampoDeVision(int posibleVision)
+    {
         switch (posibleVision)
-           {
-               case -2:
-                   posibleVision = oeste;
-               break;
-                   
-               case -1:
-                   posibleVision = noroeste;
-               break;
-                   
-               case 8:
-                   posibleVision = norte;
-               break;    
-           }
-       
+        {
+            case -2:
+                posibleVision = oeste;
+            break;
+
+            case -1:
+                posibleVision = noroeste;
+            break;
+
+            case 8:
+                posibleVision = norte;
+            break;    
+        }
+
        return posibleVision;
-   }
+    }
+     
+      /** Esta funcion rectifica el campo de vision cuando se hacen los calculos 
+    de manera que no aprezcan resultados no comprendido*/
+    public void Avanzar()
+    {        
+        ArrayList<ArcoVecino> posiblesCaminos = getPosiblesArcos();
+        
+        if(posiblesCaminos.isEmpty())            
+        {
+            caminarYdepositar(girar180(mirada));
+        }
+        else        
+        {
+            if(posiblesCaminos.size() == 1)
+            {
+                caminarYdepositar(posiblesCaminos.get(0).getDondeQueda());
+            }
+            else
+            {
+               ACO.CalculosACO.calcularProbabilidadDelMovimiento(posiblesCaminos);
+               
+               float lineaDeProb[] = new float[posiblesCaminos.size()-1];       
+
+               for (int i = 0; i < lineaDeProb.length; i++) 
+               {
+                   for (int j = i; j >= 0; j--)
+                   lineaDeProb[i] += posiblesCaminos.get(j).getProbabilidad();
+               }
+
+               float NumeroAleatorio = (float) (Math.random()*1);
+
+                if(ACO.CalculosACO.debug)
+                    System.out.println("------"+NumeroAleatorio);
+                
+               for (int i = 0; i < lineaDeProb.length; i++) 
+               {
+                    if(i==0 && NumeroAleatorio < lineaDeProb[i])
+                    {   
+                       caminarYdepositar(posiblesCaminos.get(i).getDondeQueda());
+                       //AlternarPuntoObjetivo();
+                    }
+                    else
+                    {
+                        if(i== lineaDeProb.length - 1 &&  NumeroAleatorio >= lineaDeProb[i] )
+                        {
+                           caminarYdepositar(posiblesCaminos.get( posiblesCaminos.size()-1 ).getDondeQueda());
+                           //AlternarPuntoObjetivo();
+                        }
+                        else
+                        {
+                            if( NumeroAleatorio >= lineaDeProb[i] && NumeroAleatorio < lineaDeProb[i+1] )
+                            {
+                                caminarYdepositar(posiblesCaminos.get(i+1).getDondeQueda());
+                                //AlternarPuntoObjetivo();
+                            }
+                        }
+                    }
+               }    
+            }
+        }
+        
+        AlternarPuntoObjetivo();
+    }
     
     public static int girar180(int mirada)           
    {
@@ -237,5 +299,34 @@ public class Agente
            }
        }
    }
+   
+    protected float distanciaAvanzada(int delta)
+    {
+       if(!isVisionHorizontaloVertical())
+            return (velocidad * delta/1000)* (Game.imgResized/Mapa.longitudArcoDiagonal);
+       
+       return (velocidad * delta/1000)* (Game.imgResized/Mapa.longitudArcoHorizontal);
+    }
+
+    public int getIdAgente() {
+        return idAgente;
+    }
+
+    public int getMirada() {
+        return mirada;
+    }
+
+    public ArrayList<ArcoGrafoFeromona> getArcosVisitados() {
+        return arcosVisitados;
+    }
+
+    public CuadroMapa getPosActual() {
+        return posActual;
+    }
+    
+    
+   
+   abstract public void render(Image Agente, float imgResized, float imgScale) throws SlickException;
+   abstract public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException;
     
 }

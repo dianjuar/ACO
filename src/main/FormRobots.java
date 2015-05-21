@@ -2,8 +2,10 @@ package main;
 
 //-Dorg.lwjgl.opengl.Display.allowSoftwareOpenGL=true
 
+import Agentes.AgenteFisico;
 import Agentes.AgenteVirtual;
 import MapaContexto.Mapa;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -24,6 +26,7 @@ public class FormRobots extends javax.swing.JFrame
     private final ImageIcon play, stop;
     
     private AgenteVirtual aVirtual[];
+    public static ArrayList<AgenteFisico> aFisico;
     
     public FormRobots( int NumeroDeAgentesFisicos, float VelocidadMaxima, float DistanciaEntreCuadros, int intMat[][]  )
     {
@@ -32,6 +35,8 @@ public class FormRobots extends javax.swing.JFrame
         stop = new javax.swing.ImageIcon(getClass().getResource("/Media/Img/PanelDeControl/stop.png"));
         
         initComponents();  
+        
+        aFisico = new ArrayList<>();
         
         textDistanciaEntreNodos.setText( String.valueOf( DistanciaEntreCuadros ) );
         jTextField_NAgentes_Fisicos.setText( String.valueOf( NumeroDeAgentesFisicos ) );
@@ -702,7 +707,7 @@ public class FormRobots extends javax.swing.JFrame
               aVirtual = new AgenteVirtual[numeroDeAgentes];
               
              for (int i = 0; i < aVirtual.length; i++)              
-                aVirtual[i] = new AgenteVirtual(i, AgenteVirtual.velocidad, Mapa.cuadroInicial,-1);
+                aVirtual[i] = new AgenteVirtual(i, Mapa.cuadroInicial, -1, AgenteVirtual.velocidad);
              
             
              simulacion.getGameSimulacion().setaVirtual(aVirtual);
