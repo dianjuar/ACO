@@ -14,7 +14,7 @@ public class AgenteVirtual extends Agente
    
     public AgenteVirtual(int ID, CuadroMapa posInicial, int mirada, float velocidad)
     {    
-        super(ID, mirada);
+        super(ID);
         this.velocidad = velocidad;
 
         Avanzar();
