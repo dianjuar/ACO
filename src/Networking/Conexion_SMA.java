@@ -9,7 +9,6 @@ import Agentes.AgenteFisico;
 import Networking.base.DataServer;
 import Networking.base.Encabezado_Mensajes;
 import Networking.base.Puertos;
-import java.awt.Robot;
 import main.InicioRobots;
 import javax.swing.JLabel;
 import main.FormRobots;
@@ -45,19 +44,8 @@ public class Conexion_SMA extends DataServer
             String vec[] = cuerpo.split( Encabezado_Mensajes.Msj_divisor_2 );
 
             System.out.println(cuerpo);
-            System.out.println(vec[0]);
-            System.out.println(vec[1]);
-
-            if(vec[0].contains(Encabezado_Mensajes.Msj_PInicio_SMAtoACO_HowMany))
-            {
-                Nagentes = Integer.valueOf(vec[0].split( Encabezado_Mensajes.Msj_PInicio_SMAtoACO_HowMany )[1]);
-                maxVel = Float.valueOf(vec[1].split( Encabezado_Mensajes.Msj_PInicio_SMAtoACO_VelMax )[1]);
-            }
-            else
-            {
-                Nagentes = Integer.valueOf(vec[1].split( Encabezado_Mensajes.Msj_PInicio_SMAtoACO_HowMany )[1]);
-                maxVel = Float.valueOf(vec[0].split( Encabezado_Mensajes.Msj_PInicio_SMAtoACO_VelMax )[1]);
-            } 
+            Nagentes = Integer.valueOf( cuerpo );
+            
 
             Tools.GestionLabels.CambiarLabel_correcto25x25(estado);
             i.faseCompletada();

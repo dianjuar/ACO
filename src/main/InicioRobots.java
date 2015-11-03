@@ -28,7 +28,10 @@ public class InicioRobots extends javax.swing.JFrame
         if( NfasesCompletadas == 2)
         {
             this.dispose();
-            new FormRobots( cSMA.getNagentes() , cSMA.getNagentes(), resMapa.getDistanciaEntreCuadros(), resMapa.getINT_mat()  ).setVisible(true);
+            new FormRobots( cSMA.getNagentes() , 
+                            cSMA.getNagentes(), 
+                            resMapa.getDistanciaEntreCuadros(), 
+                            resMapa.getINT_mat()  ).setVisible(true);
         }
     }
 
