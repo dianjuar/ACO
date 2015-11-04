@@ -28,7 +28,7 @@ public class FormRobots extends javax.swing.JFrame
     private AgenteVirtual aVirtual[];
     public static ArrayList<AgenteFisico> aFisico;
     
-    public FormRobots( int NumeroDeAgentesFisicos, float VelocidadMaxima, float DistanciaEntreCuadros, int intMat[][]  )
+    public FormRobots( int NumeroDeAgentesFisicos, float DistanciaEntreCuadros, int intMat[][]  )
     {
         ejecutando = false;
         play = new javax.swing.ImageIcon(getClass().getResource("/Media/Img/PanelDeControl/play.png"));
@@ -71,6 +71,7 @@ public class FormRobots extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSplitPane3 = new javax.swing.JSplitPane();
         Titulo = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         panelSimulacion = new javax.swing.JPanel();
@@ -92,11 +93,6 @@ public class FormRobots extends javax.swing.JFrame
         CheckAgenteFisico = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
         jTextField_NAgentes_Fisicos = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        SliderTodosLosAgentesVel = new javax.swing.JSlider();
-        LabelVelocidadAgenteFisico1 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel3 = new javax.swing.JPanel();
@@ -259,9 +255,9 @@ public class FormRobots extends javax.swing.JFrame
 
         jLabel1.setText("Velocidad");
 
-        LabelVelocidadAgenteFisico.setText("0.10");
+        LabelVelocidadAgenteFisico.setText("10");
 
-        jLabel2.setText("mts/s");
+        jLabel2.setText("%");
 
         CheckAgenteFisico.setBackground(new java.awt.Color(197, 197, 197));
         CheckAgenteFisico.setSelected(true);
@@ -294,7 +290,7 @@ public class FormRobots extends javax.swing.JFrame
                                 .addComponent(LabelVelocidadAgenteFisico)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,51 +311,6 @@ public class FormRobots extends javax.swing.JFrame
 
         jTabbedPane1.addTab("Agentes Físicos", jPanel9);
 
-        jLabel7.setText("Velocidad");
-
-        SliderTodosLosAgentesVel.setMajorTickSpacing(15);
-        SliderTodosLosAgentesVel.setPaintLabels(true);
-        SliderTodosLosAgentesVel.setPaintTicks(true);
-        SliderTodosLosAgentesVel.setValue(10);
-        SliderTodosLosAgentesVel.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                SliderSliderTodosLosAgentesVelStateChanged(evt);
-            }
-        });
-
-        LabelVelocidadAgenteFisico1.setText("0.10");
-
-        jLabel8.setText("mts/s");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SliderTodosLosAgentesVel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LabelVelocidadAgenteFisico1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(SliderTodosLosAgentesVel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LabelVelocidadAgenteFisico1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(60, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Todos los Agentes", jPanel1);
-
         javax.swing.GroupLayout parametrosAgentesLayout = new javax.swing.GroupLayout(parametrosAgentes);
         parametrosAgentes.setLayout(parametrosAgentesLayout);
         parametrosAgentesLayout.setHorizontalGroup(
@@ -368,7 +319,7 @@ public class FormRobots extends javax.swing.JFrame
         );
         parametrosAgentesLayout.setVerticalGroup(
             parametrosAgentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
         );
 
         jPanel7.setBackground(new java.awt.Color(197, 197, 197));
@@ -721,7 +672,7 @@ public class FormRobots extends javax.swing.JFrame
     private final int convertQ=1;
     private final int convertaAlfa=100;
     private final int convertaBeta=100;
-    private final int convertaVelicidadAF=100;
+    private final int convertaVelicidadAF=1;
     private final int convertaVelicidadAV=100;
     private final int convertaEvap=100;
     
@@ -746,16 +697,7 @@ public class FormRobots extends javax.swing.JFrame
             
         return valor;
     }
-    
-    private void SliderSliderVelocidadFisicoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderSliderVelocidadFisicoStateChanged
         
-    }//GEN-LAST:event_SliderSliderVelocidadFisicoStateChanged
-    
-    private void SliderVelocidadVirtualStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderVelocidadVirtualStateChanged
-        AgenteVirtual.velocidad =
-                sliderToFloat(SliderVelocidadVirtual, LabelVelocidadAgenteVirtual1, convertaVelicidadAV);
-    }//GEN-LAST:event_SliderVelocidadVirtualStateChanged
-
     private void SliderTasaDeEvaporacionStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderTasaDeEvaporacionStateChanged
         ACO.VariablesACO.TasaDeEvaporacionFeromona = 
                 sliderToFloat( SliderTasaDeEvaporacion, LabelTasDeEvaporacion, convertaEvap);
@@ -776,9 +718,14 @@ public class FormRobots extends javax.swing.JFrame
                 sliderToFloat(SliderQ, LabelQ, convertQ);
     }//GEN-LAST:event_SliderQStateChanged
 
-    private void SliderSliderTodosLosAgentesVelStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderSliderTodosLosAgentesVelStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SliderSliderTodosLosAgentesVelStateChanged
+    private void SliderSliderVelocidadFisicoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderSliderVelocidadFisicoStateChanged
+        sliderToFloat(SliderVelocidadFisico, LabelVelocidadAgenteFisico, convertaVelicidadAF);
+    }//GEN-LAST:event_SliderSliderVelocidadFisicoStateChanged
+
+    private void SliderVelocidadVirtualStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderVelocidadVirtualStateChanged
+        AgenteVirtual.velocidad =
+        sliderToFloat(SliderVelocidadVirtual, LabelVelocidadAgenteVirtual1, convertaVelicidadAV);
+    }//GEN-LAST:event_SliderVelocidadVirtualStateChanged
 
     private void crearMapa( int mat[][] )
     {
@@ -794,13 +741,11 @@ public class FormRobots extends javax.swing.JFrame
     private javax.swing.JLabel LabelQ;
     private javax.swing.JLabel LabelTasDeEvaporacion;
     private javax.swing.JLabel LabelVelocidadAgenteFisico;
-    private javax.swing.JLabel LabelVelocidadAgenteFisico1;
     private javax.swing.JLabel LabelVelocidadAgenteVirtual1;
     private javax.swing.JSlider SliderAlfa;
     private javax.swing.JSlider SliderBeta;
     private javax.swing.JSlider SliderQ;
     private javax.swing.JSlider SliderTasaDeEvaporacion;
-    private javax.swing.JSlider SliderTodosLosAgentesVel;
     private javax.swing.JSlider SliderVelocidadFisico;
     private javax.swing.JSlider SliderVelocidadVirtual;
     private javax.swing.JLabel Titulo;
@@ -816,10 +761,7 @@ public class FormRobots extends javax.swing.JFrame
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
@@ -833,6 +775,7 @@ public class FormRobots extends javax.swing.JFrame
     private javax.swing.JPanel jPanel9;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
+    private javax.swing.JSplitPane jSplitPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField_NAgentes_Fisicos;
     private javax.swing.JPanel panelSimulacion;

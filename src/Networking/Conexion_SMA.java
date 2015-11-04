@@ -9,7 +9,7 @@ import Agentes.AgenteFisico;
 import Networking.base.DataServer;
 import Networking.base.Encabezado_Mensajes;
 import Networking.base.Puertos;
-import main.InicioRobots;
+import main.InicioRobots_RecepsionDeDatos;
 import javax.swing.JLabel;
 import main.FormRobots;
 
@@ -20,12 +20,12 @@ import main.FormRobots;
 public class Conexion_SMA extends DataServer
 {
     private JLabel estado;
-    InicioRobots i;
+    InicioRobots_RecepsionDeDatos i;
     
     private int Nagentes;
     private float maxVel;
     
-    public Conexion_SMA(JLabel estado, InicioRobots i) 
+    public Conexion_SMA(JLabel estado, InicioRobots_RecepsionDeDatos i) 
     {
         super(Puertos.Recibe_SMA, "conexion con SMA");
         this.estado = estado;
@@ -44,7 +44,7 @@ public class Conexion_SMA extends DataServer
             String vec[] = cuerpo.split( Encabezado_Mensajes.Msj_divisor_2 );
 
             System.out.println(cuerpo);
-            Nagentes = Integer.valueOf( cuerpo );
+            Nagentes = Integer.valueOf( cuerpo.split("_")[1] );
             
 
             Tools.GestionLabels.CambiarLabel_correcto25x25(estado);

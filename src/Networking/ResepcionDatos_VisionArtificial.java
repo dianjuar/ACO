@@ -10,7 +10,7 @@ import Networking.base.Encabezado_Mensajes;
 import Networking.base.Puertos;
 //import Networking.base.Puertos;
 import javax.swing.JLabel;
-import main.InicioRobots;
+import main.InicioRobots_RecepsionDeDatos;
 
 /**
  *
@@ -25,7 +25,7 @@ public class ResepcionDatos_VisionArtificial extends DataServer
     private static final String Prefijo_Mat = "Mat";
     private static final String Prefijo_Dist = "Dist";
     
-    private InicioRobots i;
+    private InicioRobots_RecepsionDeDatos recepsionDeDatos;
 
     public int[][] getINT_mat() {
         return INT_mat;
@@ -33,16 +33,14 @@ public class ResepcionDatos_VisionArtificial extends DataServer
 
     public float getDistanciaEntreCuadros() {
         return distanciaEntreCuadros;
-    }
+    }    
     
-    
-    
-    public ResepcionDatos_VisionArtificial(JLabel etapa, InicioRobots i) 
+    public ResepcionDatos_VisionArtificial(JLabel etapa, InicioRobots_RecepsionDeDatos i) 
     {
         super(Puertos.Recibe_sistemaVisionAritificial, "Recepción del mapa y distancia entre cuadros por parte del modulo de visión artificial");
         
         this.etapa = etapa;
-        this.i = i;
+        this.recepsionDeDatos = i;
     } 
    
     @Override
@@ -73,7 +71,7 @@ public class ResepcionDatos_VisionArtificial extends DataServer
         System.out.println(distanciaEntreCuadros);
           
         Tools.GestionLabels.CambiarLabel_correcto25x25(etapa);
-        i.faseCompletada();
+        recepsionDeDatos.faseCompletada();
     }
 
     private void construir_IntMat(String sMat)

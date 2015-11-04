@@ -194,7 +194,7 @@ public class index extends javax.swing.JFrame {
         if(radio_Simulacion.isSelected())                 
             new FormSimulacion().setVisible(true);        
         else
-            new InicioRobots().setVisible(true);
+            new InicioRobots_RecepsionDeDatos().setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -202,7 +202,7 @@ public class index extends javax.swing.JFrame {
        
        if(radio_Robots.isSelected())
        {
-           new InicioRobots().setVisible(true);
+           new InicioRobots_RecepsionDeDatos().setVisible(true);
        }
        else
        {

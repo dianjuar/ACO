@@ -4,14 +4,14 @@ import Networking.*;
 import Networking.base.Puertos;
 
 
-public class InicioRobots extends javax.swing.JFrame 
+public class InicioRobots_RecepsionDeDatos extends javax.swing.JFrame 
 {
     private ResepcionDatos_VisionArtificial resMapa;
     private Conexion_SMA cSMA;
     public static int NfasesCompletadas;
 
     
-    public InicioRobots()
+    public InicioRobots_RecepsionDeDatos()
     {
         initComponents();
         
@@ -28,8 +28,7 @@ public class InicioRobots extends javax.swing.JFrame
         if( NfasesCompletadas == 2)
         {
             this.dispose();
-            new FormRobots( cSMA.getNagentes() , 
-                            cSMA.getNagentes(), 
+            new FormRobots( cSMA.getNagentes(), 
                             resMapa.getDistanciaEntreCuadros(), 
                             resMapa.getINT_mat()  ).setVisible(true);
         }
