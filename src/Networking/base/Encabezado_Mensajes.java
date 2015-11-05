@@ -12,7 +12,7 @@ package Networking.base;
 public class Encabezado_Mensajes 
 {
     public static final String Msj_divisor = "->";
-        public static final String Msj_divisor_2 = "-";   
+        public static final String Msj_divisor_2 = "_";   
         
     public static final String Msj_cerrar = "close";
     public static final String Msj_conectado = "connect"; 

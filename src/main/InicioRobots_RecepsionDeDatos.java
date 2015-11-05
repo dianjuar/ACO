@@ -29,6 +29,8 @@ public class InicioRobots_RecepsionDeDatos extends javax.swing.JFrame
         {
             this.dispose();
             new FormRobots( cSMA.getNagentes(), 
+                            cSMA.getVelocidadMaxima(),
+                            cSMA.getVelocidadInicial(),
                             resMapa.getDistanciaEntreCuadros(), 
                             resMapa.getINT_mat()  ).setVisible(true);
         }

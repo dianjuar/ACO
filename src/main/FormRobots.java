@@ -8,6 +8,7 @@ import MapaContexto.Mapa;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.accessibility.AccessibleRole;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import org.newdawn.slick.CanvasGameContainer;
@@ -28,7 +29,15 @@ public class FormRobots extends javax.swing.JFrame
     private AgenteVirtual aVirtual[];
     public static ArrayList<AgenteFisico> aFisico;
     
-    public FormRobots( int NumeroDeAgentesFisicos, float DistanciaEntreCuadros, int intMat[][]  )
+    private final int convertQ=1;
+    private final int convertaAlfa=100;
+    private final int convertaBeta=100;
+    private final int convertaVelicidadAF=100;
+    private final int convertaVelicidadAV=100;
+    private final int convertaEvap=100;
+    
+    public FormRobots( int NumeroDeAgentesFisicos, float VelociadMaxima, float VelocidadInicial,
+                       float DistanciaEntreCuadros, int intMat[][]  )
     {
         ejecutando = false;
         play = new javax.swing.ImageIcon(getClass().getResource("/Media/Img/PanelDeControl/play.png"));
@@ -44,6 +53,8 @@ public class FormRobots extends javax.swing.JFrame
         textDistanciaEntreNodos.setText( String.valueOf( DistanciaEntreCuadros ) );
         
         crearMapa( intMat );
+        
+        cargarVelocidad_MaximaYDefault(VelociadMaxima, VelocidadInicial);
         
         try 
         {
@@ -243,8 +254,8 @@ public class FormRobots extends javax.swing.JFrame
 
         jPanel9.setPreferredSize(new java.awt.Dimension(2, 89));
 
-        SliderVelocidadFisico.setMajorTickSpacing(15);
-        SliderVelocidadFisico.setPaintLabels(true);
+        SliderVelocidadFisico.setMajorTickSpacing(500);
+        SliderVelocidadFisico.setMaximum(3300);
         SliderVelocidadFisico.setPaintTicks(true);
         SliderVelocidadFisico.setValue(10);
         SliderVelocidadFisico.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -257,7 +268,7 @@ public class FormRobots extends javax.swing.JFrame
 
         LabelVelocidadAgenteFisico.setText("10");
 
-        jLabel2.setText("%");
+        jLabel2.setText("cm/s");
 
         CheckAgenteFisico.setBackground(new java.awt.Color(197, 197, 197));
         CheckAgenteFisico.setSelected(true);
@@ -290,7 +301,7 @@ public class FormRobots extends javax.swing.JFrame
                                 .addComponent(LabelVelocidadAgenteFisico)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -669,13 +680,7 @@ public class FormRobots extends javax.swing.JFrame
         ejecutando = !ejecutando;
     }//GEN-LAST:event_BotonEmpezarSimulacionActionPerformed
     
-    private final int convertQ=1;
-    private final int convertaAlfa=100;
-    private final int convertaBeta=100;
-    private final int convertaVelicidadAF=1;
-    private final int convertaVelicidadAV=100;
-    private final int convertaEvap=100;
-    
+
     private void cargarVariables()
     {
         AgenteVirtual.velocidad =
@@ -690,7 +695,7 @@ public class FormRobots extends javax.swing.JFrame
                         sliderToFloat(SliderQ, LabelQ,convertQ);
     }
     
-    private float sliderToFloat(javax.swing.JSlider s, JLabel l, int convert)
+    static private float sliderToFloat(javax.swing.JSlider s, JLabel l, int convert)
     {
         float valor = (float) s.getValue()/convert;
         l.setText(String.valueOf(valor));
@@ -732,6 +737,13 @@ public class FormRobots extends javax.swing.JFrame
         m = new Mapa(mat);
     }
 
+    private void cargarVelocidad_MaximaYDefault( float velMaxima, float velDefault )
+    {
+        SliderVelocidadFisico.setMaximum( (int) (velMaxima*convertaVelicidadAF) );
+        SliderVelocidadFisico.setValue( (int)velDefault*convertaVelicidadAF );
+        sliderToFloat(SliderVelocidadFisico, LabelVelocidadAgenteFisico, convertaVelicidadAF);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonEmpezarSimulacion;
     private javax.swing.JCheckBox CheckAgenteFisico;

@@ -42,30 +42,18 @@ public class Conexion_SMA extends DataServer
 
         if( encabezado.equals( Encabezado_Mensajes.Msj_PInicio_SMAtoACO ) )
         {
-            /*
-             String vec[] = cuerpo.split( Encabezado_Mensajes.Msj_divisor_2 );
-
-                Nagentes = Integer.valueOf(vec[0].split( Encabezado_Mensajes.Msj_PInicio_SMAtoACO_HowMany )[1]);
-                maxVel = Float.valueOf(vec[1].split( Encabezado_Mensajes.Msj_PInicio_SMAtoACO_VelMax )[1]);
-            */
-            
             String vec[] = cuerpo.split( Encabezado_Mensajes.Msj_divisor_2 );
 
             System.out.println(cuerpo);
             Nagentes = Integer.valueOf( vec[0].split(Encabezado_Mensajes.Msj_PInicio_SMAtoACO_HowMany)[1] );
             VelocidadMaxima = Float.valueOf( vec[1].split(Encabezado_Mensajes.Msj_PInicio_SMAtoACO_VelMax)[1] );
             VelocidadInicial = Float.valueOf( vec[2].split(Encabezado_Mensajes.Msj_PInicio_SMAtoACO_VelIni)[1] );
-
             
-
             Tools.GestionLabels.CambiarLabel_correcto25x25(estado);
             recepsionDeDatos.faseCompletada();
         }
         else if( encabezado.equals( Encabezado_Mensajes.Msj_nextStep ) )
         {
-            /*Encabezado_Mensajes.Msj_nextStep + Encabezado_Mensajes.Msj_divisor + 
-                robotID;*/
-            
             int robotID = Integer.valueOf( cuerpo );
             
             if( isAgenteNuevo(robotID) )
