@@ -9,9 +9,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Image;
 
 public class AgenteVirtual extends Agente
-{  
-   public static float velocidad;
-   
+{
+    public static float velocidad;
+    
     public AgenteVirtual(int ID, CuadroMapa posInicial, int mirada, float velocidad)
     {    
         super(ID);

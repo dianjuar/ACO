@@ -19,6 +19,7 @@ public class InicioRobots_RecepsionDeDatos extends javax.swing.JFrame
         
         resMapa = new ResepcionDatos_VisionArtificial(label_paso1,this);
         cSMA = new Conexion_SMA( label_paso2, this);
+        Agentes.AgenteFisico.setConexSMA(cSMA);
     }
     
     public void faseCompletada()

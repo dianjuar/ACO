@@ -5,7 +5,6 @@
  */
 package Agentes;
 
-import MapaContexto.CuadroMapa;
 import MapaContexto.Mapa;
 import Networking.Conexion_SMA;
 import org.newdawn.slick.GameContainer;
@@ -19,16 +18,27 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class AgenteFisico extends Agente
 {
-    private Conexion_SMA conexSMA;
+    private static Conexion_SMA conexSMA;
+    public static float velocidad;
 
     public AgenteFisico(int ID, Conexion_SMA conexSMA)
     {
         super(ID);
+        this.conexSMA = conexSMA;
     }
     
     public void EnviarNuevaDireccion()
     {
         conexSMA.enviarNuevaDireccion( idAgente, mirada,  isVisionHorizontaloVertical() ? Mapa.longitudArcoHorizontal: Mapa.longitudArcoDiagonal );
+    }
+    
+    public static void EnviarNuevaVelocidad()
+    {
+        conexSMA.enviarNuevaVelocidad(velocidad);
+    }
+
+    public static void setConexSMA(Conexion_SMA conexSMA) {
+        AgenteFisico.conexSMA = conexSMA;
     }
 
     @Override

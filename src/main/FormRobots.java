@@ -263,6 +263,16 @@ public class FormRobots extends javax.swing.JFrame
                 SliderSliderVelocidadFisicoStateChanged(evt);
             }
         });
+        SliderVelocidadFisico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                SliderVelocidadFisicoMouseReleased(evt);
+            }
+        });
+        SliderVelocidadFisico.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SliderVelocidadFisicoKeyReleased(evt);
+            }
+        });
 
         jLabel1.setText("Velocidad");
 
@@ -724,13 +734,22 @@ public class FormRobots extends javax.swing.JFrame
     }//GEN-LAST:event_SliderQStateChanged
 
     private void SliderSliderVelocidadFisicoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderSliderVelocidadFisicoStateChanged
-        sliderToFloat(SliderVelocidadFisico, LabelVelocidadAgenteFisico, convertaVelicidadAF);
+        AgenteFisico.velocidad = 
+                sliderToFloat(SliderVelocidadFisico, LabelVelocidadAgenteFisico, convertaVelicidadAF);
     }//GEN-LAST:event_SliderSliderVelocidadFisicoStateChanged
 
     private void SliderVelocidadVirtualStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SliderVelocidadVirtualStateChanged
         AgenteVirtual.velocidad =
-        sliderToFloat(SliderVelocidadVirtual, LabelVelocidadAgenteVirtual1, convertaVelicidadAV);
+                sliderToFloat(SliderVelocidadVirtual, LabelVelocidadAgenteVirtual1, convertaVelicidadAV);
     }//GEN-LAST:event_SliderVelocidadVirtualStateChanged
+
+    private void SliderVelocidadFisicoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderVelocidadFisicoMouseReleased
+        AgenteFisico.EnviarNuevaVelocidad();
+    }//GEN-LAST:event_SliderVelocidadFisicoMouseReleased
+
+    private void SliderVelocidadFisicoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SliderVelocidadFisicoKeyReleased
+        AgenteFisico.EnviarNuevaVelocidad();
+    }//GEN-LAST:event_SliderVelocidadFisicoKeyReleased
 
     private void crearMapa( int mat[][] )
     {

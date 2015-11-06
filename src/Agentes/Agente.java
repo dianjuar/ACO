@@ -33,6 +33,7 @@ public abstract class Agente
     public static final int oeste=6;
     public static final int noroeste=7;
     
+    
     protected int idAgente;
     protected static final int rangoDeVision = 5;
     protected int mirada;

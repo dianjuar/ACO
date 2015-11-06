@@ -83,7 +83,7 @@ public class Conexion_SMA extends DataServer
     }
     
     
-    public void enviarNuevaVelocidad(int v)
+    public void enviarNuevaVelocidad(float v)
     {
         String sms = Encabezado_Mensajes.Msj_ACOtoSMA_setVelocidad + Encabezado_Mensajes.Msj_divisor + v;
         
