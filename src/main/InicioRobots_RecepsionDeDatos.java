@@ -33,7 +33,8 @@ public class InicioRobots_RecepsionDeDatos extends javax.swing.JFrame
                             cSMA.getVelocidadMaxima(),
                             cSMA.getVelocidadInicial(),
                             resMapa.getDistanciaEntreCuadros(), 
-                            resMapa.getINT_mat()  ).setVisible(true);
+                            resMapa.getINT_mat(),
+                            cSMA).setVisible(true);
         }
     }
 

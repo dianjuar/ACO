@@ -90,6 +90,11 @@ public class Conexion_SMA extends DataServer
         D_s.enviar(sms);
     }
     
+    public void enviar_avisoDeInicio() 
+    {
+        D_s.enviar( Encabezado_Mensajes.Msj_ACotoSMA_Inicio );
+    }
+    
     private boolean isAgenteNuevo(int ID)
     {
         for (AgenteFisico aFisico : FormRobots.aFisico) 

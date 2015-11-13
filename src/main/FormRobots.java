@@ -5,6 +5,7 @@ package main;
 import Agentes.AgenteFisico;
 import Agentes.AgenteVirtual;
 import MapaContexto.Mapa;
+import Networking.Conexion_SMA;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,9 +37,12 @@ public class FormRobots extends javax.swing.JFrame
     private final int convertaVelicidadAV=100;
     private final int convertaEvap=100;
     
+    private Conexion_SMA cSMA;
+    
     public FormRobots( int NumeroDeAgentesFisicos, float VelociadMaxima, float VelocidadInicial,
-                       float DistanciaEntreCuadros, int intMat[][])
+                       float DistanciaEntreCuadros, int intMat[][], Conexion_SMA cSMA)
     {
+        this.cSMA = cSMA;
         ejecutando = false;
         play = new javax.swing.ImageIcon(getClass().getResource("/Media/Img/PanelDeControl/play.png"));
         stop = new javax.swing.ImageIcon(getClass().getResource("/Media/Img/PanelDeControl/stop.png"));
@@ -657,7 +661,6 @@ public class FormRobots extends javax.swing.JFrame
 
     private void BotonEmpezarSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEmpezarSimulacionActionPerformed
         
-        
         if(ejecutando)
         {
             //Se detubo la simulacion            
@@ -669,6 +672,8 @@ public class FormRobots extends javax.swing.JFrame
         }
         else
         {
+            enviar_avisoDeInicio();
+            
             cargarVariables();
           
             comboBoxNAgentesVirtual.setEnabled(false);
@@ -817,4 +822,9 @@ public class FormRobots extends javax.swing.JFrame
     private javax.swing.JPanel parametrosAgentes;
     private javax.swing.JTextField textDistanciaEntreNodos;
     // End of variables declaration//GEN-END:variables
+
+    private void enviar_avisoDeInicio()
+    {
+        cSMA.enviar_avisoDeInicio();
+    }
 }

@@ -24,11 +24,6 @@ public class Encabezado_Mensajes
         public static final String Msj_PInicio_SMAtoACO_VelIni = "VelIni";
         
     public static final String Msj_ACOtoSMA_setVelocidad = "SVel";
-
-       
-
-
-
-    
+    public static final String Msj_ACotoSMA_Inicio = "inicio";
     
 }
