@@ -44,6 +44,7 @@ public static Mapa mapa;
     {
         this.getState(STATE_EnEspera).init(gc, this);
         this.getState(STATE_Ejecucion).init(gc, this);
+        
         this.enterState(STATE_EnEspera);
         gc.setShowFPS(false);
     }

@@ -8,7 +8,6 @@ import MapaContexto.Mapa;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.accessibility.AccessibleRole;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import org.newdawn.slick.CanvasGameContainer;
@@ -16,7 +15,7 @@ import org.newdawn.slick.SlickException;
 
 public class FormRobots extends javax.swing.JFrame 
 {
-    private Mapa m;
+    private Mapa mapa;
     
     private CanvasGameContainer contenedorDeLaSimulacion;
     private Game simulacion;
@@ -28,6 +27,7 @@ public class FormRobots extends javax.swing.JFrame
     
     private AgenteVirtual aVirtual[];
     public static ArrayList<AgenteFisico> aFisico;
+    private int numeroAgentesFisicos;
     
     private final int convertQ=1;
     private final int convertaAlfa=100;
@@ -37,24 +37,13 @@ public class FormRobots extends javax.swing.JFrame
     private final int convertaEvap=100;
     
     public FormRobots( int NumeroDeAgentesFisicos, float VelociadMaxima, float VelocidadInicial,
-                       float DistanciaEntreCuadros, int intMat[][]  )
+                       float DistanciaEntreCuadros, int intMat[][])
     {
         ejecutando = false;
         play = new javax.swing.ImageIcon(getClass().getResource("/Media/Img/PanelDeControl/play.png"));
         stop = new javax.swing.ImageIcon(getClass().getResource("/Media/Img/PanelDeControl/stop.png"));
         
         initComponents();  
-        
-        aFisico = new ArrayList<>();
-        
-        textDistanciaEntreNodos.setText( String.valueOf( DistanciaEntreCuadros ) );
-        jTextField_NAgentes_Fisicos.setText( String.valueOf( NumeroDeAgentesFisicos ) );
-       
-        textDistanciaEntreNodos.setText( String.valueOf( DistanciaEntreCuadros ) );
-        
-        crearMapa( intMat );
-        
-        cargarVelocidad_MaximaYDefault(VelociadMaxima, VelocidadInicial);
         
         try 
         {
@@ -64,6 +53,20 @@ public class FormRobots extends javax.swing.JFrame
         {
             Logger.getLogger(FormRobots.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        aFisico = new ArrayList<>();
+        
+        textDistanciaEntreNodos.setText( String.valueOf( DistanciaEntreCuadros ) );
+        Mapa.setLongitudArcoHorizontal(DistanciaEntreCuadros);
+
+                
+        jTextField_NAgentes_Fisicos.setText( String.valueOf( NumeroDeAgentesFisicos ) );
+        this.numeroAgentesFisicos = NumeroDeAgentesFisicos;
+       
+        textDistanciaEntreNodos.setText( String.valueOf( DistanciaEntreCuadros ) );
+        
+        crearMapa( intMat );
+        cargarVelocidad_MaximaYDefault(VelociadMaxima, VelocidadInicial);
         
     }
     
@@ -666,25 +669,25 @@ public class FormRobots extends javax.swing.JFrame
         }
         else
         {
-             cargarVariables();
+            cargarVariables();
           
             comboBoxNAgentesVirtual.setEnabled(false);
             
-             BotonEmpezarSimulacion.setText(msjBotonSimulacion);   
-             BotonEmpezarSimulacion.setIcon(stop);
-             
-             int numeroDeAgentes = Integer.valueOf((String) comboBoxNAgentesVirtual.getItemAt(comboBoxNAgentesVirtual.getSelectedIndex() ) );
-              
-             m.inicializarGrafoFeromonas(numeroDeAgentes);
-              aVirtual = new AgenteVirtual[numeroDeAgentes];
-              
-             for (int i = 0; i < aVirtual.length; i++)              
+            BotonEmpezarSimulacion.setText(msjBotonSimulacion);   
+            BotonEmpezarSimulacion.setIcon(stop);
+
+            int numeroDeAgentesVirtuales = Integer.valueOf((String) comboBoxNAgentesVirtual.getItemAt(comboBoxNAgentesVirtual.getSelectedIndex() ) );  
+            
+            aVirtual = new AgenteVirtual[numeroDeAgentesVirtuales];
+            
+            mapa.inicializarGrafoFeromonas(numeroDeAgentesVirtuales + numeroAgentesFisicos);
+            Game.setMapa( mapa );
+            
+            for (int i = 0; i < aVirtual.length; i++)              
                 aVirtual[i] = new AgenteVirtual(i, Mapa.cuadroInicial, -1, AgenteVirtual.velocidad);
-             
             
-             simulacion.getGameSimulacion().setaVirtual(aVirtual);
-            
-             simulacion.enterState( Game.STATE_Ejecucion );
+            simulacion.getGameSimulacion().setaVirtual(aVirtual);            
+            simulacion.enterState( Game.STATE_Ejecucion );
         }
             
         ejecutando = !ejecutando;
@@ -753,7 +756,8 @@ public class FormRobots extends javax.swing.JFrame
 
     private void crearMapa( int mat[][] )
     {
-        m = new Mapa(mat);
+        mapa = new Mapa(mat);
+        Game.setImgTamanosyEscalas( mat.length );
     }
 
     private void cargarVelocidad_MaximaYDefault( float velMaxima, float velDefault )
