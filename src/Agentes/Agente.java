@@ -324,10 +324,87 @@ public abstract class Agente
     public CuadroMapa getPosActual() {
         return posActual;
     }
-    
-    
    
-   abstract public void render(Image Agente, float imgResized, float imgScale) throws SlickException;
-   abstract public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException;
+   public void render(Image Agente, float imgResized, float imgScale) throws SlickException
+   {
+        Agente.setCenterOfRotation( Agente.getWidth()*imgScale/2, Agente.getWidth()*imgScale/2);
+        
+        Agente.setRotation( anguloDeVision() );
+        
+        Agente.draw(posCanvas.getX(), posCanvas.getY(), imgScale);
+   }
+   
+   public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException
+   {
+        float dis = distanciaAvanzada(delta);
+        acumDist += dis;    
+        
+        switch (mirada)
+        {
+           case norte:
+              posCanvas.setY( posCanvas.getY()-dis);
+           break;
+
+           case sur:
+               posCanvas.setY( posCanvas.getY()+dis);
+           break;
+
+           case este:
+               posCanvas.setX( posCanvas.getX()+dis);
+           break;
+
+           case oeste:
+               posCanvas.setX( posCanvas.getX()-dis);
+           break;
+
+           case noreste:
+               posCanvas.setY( posCanvas.getY()-dis );
+               posCanvas.setX( posCanvas.getX()+dis );
+           break;
+
+           case noroeste:
+               posCanvas.setY( posCanvas.getY()-dis );
+               posCanvas.setX( posCanvas.getX()-dis);
+           break;
+
+           case sureste:
+               posCanvas.setY( posCanvas.getY()+dis);
+               posCanvas.setX( posCanvas.getX()+dis );
+           break;
+
+           case suroeste:
+               posCanvas.setY( posCanvas.getY()+dis);
+               posCanvas.setX( posCanvas.getX()-dis);
+           break;
+        } 
+        
+        if( isVisionHorizontaloVertical() )
+        {
+            if( acumDist >= Mapa.longitudArcoHorizontal*(Game.imgResized/Mapa.longitudArcoHorizontal))
+            {
+                acumDist =0;
+                
+                if(mirada == norte || mirada == sur)                
+                    posCanvas.setY( posActual.getY()*Game.imgResized );
+                else
+                    posCanvas.setX( posActual.getX()*Game.imgResized );
+                
+             Avanzar();
+                
+            }
+        }
+        else
+        {
+            if( acumDist >= Mapa.longitudArcoDiagonal*(Game.imgResized/Mapa.longitudArcoDiagonal) )
+            {
+                acumDist =0;
+                
+                posCanvas.setY( posActual.getY()*Game.imgResized );
+                posCanvas.setX( posActual.getX()*Game.imgResized );
+                
+                Avanzar();
+            }
+        }
+   }
     
 }

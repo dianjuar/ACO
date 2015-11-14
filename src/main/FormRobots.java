@@ -19,7 +19,7 @@ public class FormRobots extends javax.swing.JFrame
     private Mapa mapa;
     
     private CanvasGameContainer contenedorDeLaSimulacion;
-    private Game simulacion;
+    private Game game;
     
     private final String msjBotonEnEspera = "Empezar";
     private final String msjBotonSimulacion = "Parar";
@@ -46,6 +46,7 @@ public class FormRobots extends javax.swing.JFrame
         ejecutando = false;
         play = new javax.swing.ImageIcon(getClass().getResource("/Media/Img/PanelDeControl/play.png"));
         stop = new javax.swing.ImageIcon(getClass().getResource("/Media/Img/PanelDeControl/stop.png"));
+        aFisico = new ArrayList<>();
         
         initComponents();  
         
@@ -57,8 +58,6 @@ public class FormRobots extends javax.swing.JFrame
         {
             Logger.getLogger(FormRobots.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        aFisico = new ArrayList<>();
         
         textDistanciaEntreNodos.setText( String.valueOf( DistanciaEntreCuadros ) );
         Mapa.setLongitudArcoHorizontal(DistanciaEntreCuadros);
@@ -76,8 +75,10 @@ public class FormRobots extends javax.swing.JFrame
     
     private void cargarSimulacion() throws SlickException
     {
-        simulacion = new Game(panelSimulacion.getWidth(), true);
-        contenedorDeLaSimulacion = new CanvasGameContainer( simulacion);        
+        game = new Game(panelSimulacion.getWidth(), true);
+        game.setAgentesFisicos(aFisico);
+        
+        contenedorDeLaSimulacion = new CanvasGameContainer( game);        
         contenedorDeLaSimulacion.setBounds(0, 0, Game.width, Game.width);
         contenedorDeLaSimulacion.getContainer().setAlwaysRender(true);       
         contenedorDeLaSimulacion.requestFocus();
@@ -665,7 +666,7 @@ public class FormRobots extends javax.swing.JFrame
         {
             //Se detubo la simulacion            
             BotonEmpezarSimulacion.setText(msjBotonEnEspera);            
-            simulacion.enterState(Game.STATE_EnEspera);
+            game.enterState(Game.STATE_EnEspera);
             BotonEmpezarSimulacion.setIcon(play);
             
             comboBoxNAgentesVirtual.setEnabled(true);
@@ -691,8 +692,8 @@ public class FormRobots extends javax.swing.JFrame
             for (int i = 0; i < aVirtual.length; i++)              
                 aVirtual[i] = new AgenteVirtual(i, Mapa.cuadroInicial, -1, AgenteVirtual.velocidad);
             
-            simulacion.getGameSimulacion().setaVirtual(aVirtual);            
-            simulacion.enterState( Game.STATE_Ejecucion );
+            game.getGameSimulacion().setaVirtual(aVirtual);            
+            game.enterState( Game.STATE_Ejecucion );
         }
             
         ejecutando = !ejecutando;

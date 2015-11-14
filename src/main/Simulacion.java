@@ -1,5 +1,6 @@
 package main;
 
+import Agentes.AgenteFisico;
 import Agentes.AgenteVirtual;
 import MapaContexto.GrafoFeromonas;
 import MapaContexto.ArcoGrafoFeromona;
@@ -23,14 +24,13 @@ public class Simulacion extends BasicGameState
     private final ArrayList<Image> listaImgTipoArco;
     private final ArrayList<Point> listaCuadrosSeleccionados;
     
-    private Image imgAVirtual;
+    private Image imgAVirtual, imgAFisico;
     private Image imgPuntoInicial, imgPuntoFinal;
     private Image libre, obstaculo;
     private Image imgCuadroLibreSeleccionado,imgCuadroExtremoSeleccionado;
-    
-    
 
     private AgenteVirtual[] aVirtual;
+    private ArrayList<AgenteFisico> aFisico;
 
     public Simulacion() 
     {
@@ -57,6 +57,7 @@ public class Simulacion extends BasicGameState
         imgPuntoInicial = new Image( "Media\\Img\\Mapa\\puntoInicial.png" );
         
         imgAVirtual = new Image("Media\\Img\\Agentes\\ant.png");
+        imgAFisico = new Image("Media\\Img\\Agentes\\NXT_ICON.png");
       
         imgCuadroLibreSeleccionado = new Image("Media\\Img\\Mapa\\libreSeleccionado.png");
         imgCuadroExtremoSeleccionado = new Image("Media\\Img\\Mapa\\ExtremoSeleccionado.png");
@@ -90,6 +91,7 @@ public class Simulacion extends BasicGameState
         renderPuntosFinalIncial();        
         renderCuadrosSeleccionados(g);
         renderAgentesVirtuales(imgAVirtual, imgResized, imgSacale);
+        renderAgentesFisicos(imgAFisico, imgResized, imgSacale);
         
     }
     
@@ -129,10 +131,15 @@ public class Simulacion extends BasicGameState
     
     private void renderAgentesVirtuales(Image imgAVirtual, float imgResized, float imgSacale) throws SlickException
     {
-        for (AgenteVirtual Avir : aVirtual) {
+        for (AgenteVirtual Avir : aVirtual) 
             Avir.render(imgAVirtual, imgResized, imgSacale);
-        }
     }   
+    
+    private void renderAgentesFisicos(Image imgAFisico, float imgResized, float imgSacale) throws SlickException 
+    {
+        for (AgenteFisico Afis : aFisico) 
+            Afis.render(imgAFisico, imgResized, imgSacale);
+    }
     
     private void renderArcosFeromona()
     {
@@ -175,8 +182,11 @@ public class Simulacion extends BasicGameState
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException 
     {
-        for (AgenteVirtual aVirtual1 : aVirtual) 
-            aVirtual1.update(container, game, delta);
+        for (AgenteVirtual aVir : aVirtual) 
+            aVir.update(container, game, delta);
+        
+        for (AgenteFisico aFis : aFisico ) 
+            aFis.update(container, game, delta);
         
         Game.mapa.getGrafoFeromonas().updateFeromonas(container, game, delta);
         
@@ -199,4 +209,11 @@ public class Simulacion extends BasicGameState
         this.aVirtual = aVirtual;
     }
 
+    public void setaFisico(ArrayList<AgenteFisico> aFisico) {
+        this.aFisico = aFisico;
+    }
+
+    
+    
+    
 }

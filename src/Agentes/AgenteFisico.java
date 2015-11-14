@@ -37,17 +37,8 @@ public class AgenteFisico extends Agente
         conexSMA.enviarNuevaVelocidad(velocidad);
     }
 
-    public static void setConexSMA(Conexion_SMA conexSMA) {
+    public static void setConexSMA(Conexion_SMA conexSMA)
+    {
         AgenteFisico.conexSMA = conexSMA;
-    }
-
-    @Override
-    public void render(Image Agente, float imgResized, float imgScale) throws SlickException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

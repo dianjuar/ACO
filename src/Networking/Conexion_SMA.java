@@ -9,6 +9,7 @@ import Agentes.AgenteFisico;
 import Networking.base.DataServer;
 import Networking.base.Encabezado_Mensajes;
 import Networking.base.Puertos;
+import java.util.ArrayList;
 import main.InicioRobots_RecepsionDeDatos;
 import javax.swing.JLabel;
 import main.FormRobots;

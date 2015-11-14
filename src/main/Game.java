@@ -1,6 +1,7 @@
 package main;
 
 import MapaContexto.Mapa;
+import java.util.ArrayList;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
@@ -72,5 +73,10 @@ public static Mapa mapa;
 
     public static void setMapa(Mapa mapa) {
         Game.mapa = mapa;
+    }
+    
+    public void setAgentesFisicos( ArrayList<Agentes.AgenteFisico> AFisico )
+    {
+        GameSimulacion.setaFisico(AFisico);
     }
 }
