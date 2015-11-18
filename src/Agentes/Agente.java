@@ -37,6 +37,7 @@ public abstract class Agente
     protected int idAgente;
     protected static final int rangoDeVision = 5;
     protected int mirada;
+    protected boolean avanzarAutomaticamente;
     
     protected final ArrayList<ArcoGrafoFeromona> arcosVisitados;
     
@@ -47,6 +48,8 @@ public abstract class Agente
     protected Point posCanvas;
 
     protected boolean estoyBuscandoLaLlegada;
+    
+    private boolean walked;
 
     public Agente(int ID)
     {
@@ -56,6 +59,7 @@ public abstract class Agente
         this.mapa = Game.mapa;
         
         acumDist = 0;
+        walked = true;
         
         this.posCanvas = new Point(Game.imgResized*posActual.getX(), 
                                    Game.imgResized*posActual.getY());
@@ -64,6 +68,8 @@ public abstract class Agente
         arcosVisitados = new ArrayList<>();
         
         estoyBuscandoLaLlegada = true;
+        
+        avanzarAutomaticamente = true;
     }
     
     protected float anguloDeVision()
@@ -96,10 +102,15 @@ public abstract class Agente
        return posibleVision;
     }
      
-      /** Esta funcion rectifica el campo de vision cuando se hacen los calculos 
+    /** Esta funcion rectifica el campo de vision cuando se hacen los calculos 
     de manera que no aprezcan resultados no comprendido*/
     public void Avanzar()
     {        
+        if( walked == false ) //si no ha terminado de caminar no se hará nada.
+            return;
+        
+        walked = false;
+        
         ArrayList<ArcoVecino> posiblesCaminos = getPosiblesArcos();
         
         if(posiblesCaminos.isEmpty())            
@@ -336,6 +347,9 @@ public abstract class Agente
    
    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException
    {
+        if(walked) //si ya caminó lo que debería caminar. No entará más en esta función.
+           return; 
+       
         float dis = distanciaAvanzada(delta);
         acumDist += dis;    
         
@@ -382,6 +396,7 @@ public abstract class Agente
         {
             if( acumDist >= Mapa.longitudArcoHorizontal*(Game.imgResized/Mapa.longitudArcoHorizontal))
             {
+                walked = true;
                 acumDist =0;
                 
                 if(mirada == norte || mirada == sur)                
@@ -389,7 +404,8 @@ public abstract class Agente
                 else
                     posCanvas.setX( posActual.getX()*Game.imgResized );
                 
-             Avanzar();
+                if( avanzarAutomaticamente )
+                    Avanzar();
                 
             }
         }
@@ -397,12 +413,14 @@ public abstract class Agente
         {
             if( acumDist >= Mapa.longitudArcoDiagonal*(Game.imgResized/Mapa.longitudArcoDiagonal) )
             {
+                walked = true;
                 acumDist =0;
                 
                 posCanvas.setY( posActual.getY()*Game.imgResized );
                 posCanvas.setX( posActual.getX()*Game.imgResized );
                 
-                Avanzar();
+                if( avanzarAutomaticamente )
+                    Avanzar();
             }
         }
    }

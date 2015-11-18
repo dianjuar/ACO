@@ -25,11 +25,12 @@ public class AgenteFisico extends Agente
     {
         super(ID);
         this.conexSMA = conexSMA;
+        this.avanzarAutomaticamente = false;
     }
     
     public void EnviarNuevaDireccion()
     {
-        conexSMA.enviarNuevaDireccion( idAgente, mirada,  isVisionHorizontaloVertical() ? Mapa.longitudArcoHorizontal: Mapa.longitudArcoDiagonal );
+        conexSMA.enviarNuevaDireccion( idAgente, mirada, isVisionHorizontaloVertical() ? Mapa.longitudArcoHorizontal: Mapa.longitudArcoDiagonal );
     }
     
     public static void EnviarNuevaVelocidad()
