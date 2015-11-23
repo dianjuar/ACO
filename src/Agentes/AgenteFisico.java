@@ -7,6 +7,7 @@ package Agentes;
 
 import MapaContexto.Mapa;
 import Networking.Conexion_SMA;
+import java.awt.Point;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -30,7 +31,9 @@ public class AgenteFisico extends Agente
     
     public void EnviarNuevaDireccion()
     {
-        conexSMA.enviarNuevaDireccion( idAgente, mirada, isVisionHorizontaloVertical() ? Mapa.longitudArcoHorizontal: Mapa.longitudArcoDiagonal );
+        conexSMA.enviarNuevaDireccion( idAgente, mirada, 
+                                       isVisionHorizontaloVertical() ? Mapa.longitudArcoHorizontal: Mapa.longitudArcoDiagonal,
+                                       this.posActual.getPosActualPoint());
     }
     
     public static void EnviarNuevaVelocidad()

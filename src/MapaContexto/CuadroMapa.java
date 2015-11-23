@@ -1,5 +1,6 @@
 package MapaContexto;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 public class CuadroMapa
@@ -47,6 +48,11 @@ public class CuadroMapa
         return y;
     }
 
+    public Point getPosActualPoint()
+    {
+        return new Point(x, y);
+    }
+    
     public int getID() {
         return ID;
     }

@@ -59,6 +59,7 @@ public class FormRobots extends javax.swing.JFrame
             Logger.getLogger(FormRobots.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        DistanciaEntreCuadros /=100;
         textDistanciaEntreNodos.setText( String.valueOf( DistanciaEntreCuadros ) );
         Mapa.setLongitudArcoHorizontal(DistanciaEntreCuadros);
 

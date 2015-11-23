@@ -9,6 +9,7 @@ import Agentes.AgenteFisico;
 import Networking.base.DataServer;
 import Networking.base.Encabezado_Mensajes;
 import Networking.base.Puertos;
+import java.awt.Point;
 import java.util.ArrayList;
 import main.InicioRobots_RecepsionDeDatos;
 import javax.swing.JLabel;
@@ -75,10 +76,13 @@ public class Conexion_SMA extends DataServer
             }
     }
     
-    public void enviarNuevaDireccion(int ID, int mirada, float distancia)
+    public void enviarNuevaDireccion(int ID, int mirada, float distancia, Point posicionDigital)
     {
         String sms = Encabezado_Mensajes.Msj_nextStep + Encabezado_Mensajes.Msj_divisor+
-                ID + Encabezado_Mensajes.Msj_divisor_2 + mirada + Encabezado_Mensajes.Msj_divisor_2 + distancia;
+                ID + Encabezado_Mensajes.Msj_divisor_2 +
+                mirada + Encabezado_Mensajes.Msj_divisor_2 + 
+                distancia + Encabezado_Mensajes.Msj_divisor_2 + 
+                posicionDigital.x + Encabezado_Mensajes.Msj_divisor_2 + posicionDigital.y;
         
         D_s.enviar(sms);
     }

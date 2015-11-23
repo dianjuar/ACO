@@ -212,8 +212,4 @@ public class Simulacion extends BasicGameState
     public void setaFisico(ArrayList<AgenteFisico> aFisico) {
         this.aFisico = aFisico;
     }
-
-    
-    
-    
 }
