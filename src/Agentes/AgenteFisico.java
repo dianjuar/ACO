@@ -7,11 +7,6 @@ package Agentes;
 
 import MapaContexto.Mapa;
 import Networking.Conexion_SMA;
-import java.awt.Point;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
 
 /**
  *
@@ -38,7 +33,7 @@ public class AgenteFisico extends Agente
     
     public static void EnviarNuevaVelocidad()
     {
-        conexSMA.enviarNuevaVelocidad(velocidad);
+        conexSMA.enviarNuevaVelocidad(velocidad*100);
     }
 
     public static void setConexSMA(Conexion_SMA conexSMA)

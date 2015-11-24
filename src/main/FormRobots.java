@@ -203,7 +203,7 @@ public class FormRobots extends javax.swing.JFrame
 
         jLabel3.setText("Velocidad");
 
-        jLabel4.setText("mts/s");
+        jLabel4.setText("m/s");
 
         CheckAgenteVirutal.setBackground(new java.awt.Color(197, 197, 197));
         CheckAgenteVirutal.setSelected(true);
@@ -240,7 +240,7 @@ public class FormRobots extends javax.swing.JFrame
                                 .addComponent(LabelVelocidadAgenteVirtual1)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,8 +263,8 @@ public class FormRobots extends javax.swing.JFrame
 
         jPanel9.setPreferredSize(new java.awt.Dimension(2, 89));
 
-        SliderVelocidadFisico.setMajorTickSpacing(500);
-        SliderVelocidadFisico.setMaximum(3300);
+        SliderVelocidadFisico.setMajorTickSpacing(50);
+        SliderVelocidadFisico.setMaximum(330);
         SliderVelocidadFisico.setPaintTicks(true);
         SliderVelocidadFisico.setValue(10);
         SliderVelocidadFisico.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -285,9 +285,9 @@ public class FormRobots extends javax.swing.JFrame
 
         jLabel1.setText("Velocidad");
 
-        LabelVelocidadAgenteFisico.setText("10");
+        LabelVelocidadAgenteFisico.setText("0.10");
 
-        jLabel2.setText("cm/s");
+        jLabel2.setText("m/s");
 
         CheckAgenteFisico.setBackground(new java.awt.Color(197, 197, 197));
         CheckAgenteFisico.setSelected(true);
@@ -320,7 +320,7 @@ public class FormRobots extends javax.swing.JFrame
                                 .addComponent(LabelVelocidadAgenteFisico)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -705,6 +705,9 @@ public class FormRobots extends javax.swing.JFrame
     {
         AgenteVirtual.velocidad =
                         sliderToFloat(SliderVelocidadVirtual, LabelVelocidadAgenteVirtual1, convertaVelicidadAV);
+        AgenteFisico.velocidad =
+                        sliderToFloat(SliderVelocidadFisico, LabelVelocidadAgenteFisico, convertaVelicidadAF);
+        
         ACO.VariablesACO.TasaDeEvaporacionFeromona = 
                         sliderToFloat( SliderTasaDeEvaporacion, LabelTasDeEvaporacion, convertaEvap);
         ACO.VariablesACO.Alfa = 
@@ -719,7 +722,7 @@ public class FormRobots extends javax.swing.JFrame
     {
         float valor = (float) s.getValue()/convert;
         l.setText(String.valueOf(valor));
-            
+        
         return valor;
     }
         

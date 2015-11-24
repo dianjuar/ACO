@@ -5,7 +5,6 @@
  */
 package Agentes;
 
-import static Agentes.AgenteVirtual.velocidad;
 import MapaContexto.ArcoGrafoFeromona;
 import MapaContexto.ArcoVecino;
 import MapaContexto.CuadroMapa;
@@ -312,7 +311,7 @@ public abstract class Agente
        }
    }
    
-    protected float distanciaAvanzada(int delta)
+    protected float distanciaAvanzada(int delta, float velocidad)
     {
        if(!isVisionHorizontaloVertical())
             return (velocidad * delta/1000)* (Game.imgResized/Mapa.longitudArcoDiagonal);
@@ -345,12 +344,12 @@ public abstract class Agente
         Agente.draw(posCanvas.getX(), posCanvas.getY(), imgScale);
    }
    
-   public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException
+   public void update(GameContainer container, StateBasedGame game, int delta, float velocidad) throws SlickException
    {
         if(walked) //si ya caminó lo que debería caminar. No entará más en esta función.
            return; 
        
-        float dis = distanciaAvanzada(delta);
+        float dis = distanciaAvanzada(delta, velocidad);
         acumDist += dis;    
         
         switch (mirada)

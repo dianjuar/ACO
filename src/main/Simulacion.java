@@ -183,10 +183,10 @@ public class Simulacion extends BasicGameState
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException 
     {
         for (AgenteVirtual aVir : aVirtual) 
-            aVir.update(container, game, delta);
+            aVir.update(container, game, delta, AgenteVirtual.velocidad);
         
         for (AgenteFisico aFis : aFisico ) 
-            aFis.update(container, game, delta);
+            aFis.update(container, game, delta, AgenteFisico.velocidad);
         
         Game.mapa.getGrafoFeromonas().updateFeromonas(container, game, delta);
         
