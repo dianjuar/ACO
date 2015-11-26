@@ -263,8 +263,8 @@ public class FormRobots extends javax.swing.JFrame
 
         jPanel9.setPreferredSize(new java.awt.Dimension(2, 89));
 
-        SliderVelocidadFisico.setMajorTickSpacing(50);
-        SliderVelocidadFisico.setMaximum(330);
+        SliderVelocidadFisico.setMajorTickSpacing(5);
+        SliderVelocidadFisico.setMaximum(33);
         SliderVelocidadFisico.setPaintTicks(true);
         SliderVelocidadFisico.setValue(10);
         SliderVelocidadFisico.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -773,7 +773,7 @@ public class FormRobots extends javax.swing.JFrame
     private void cargarVelocidad_MaximaYDefault( float velMaxima, float velDefault )
     {
         SliderVelocidadFisico.setMaximum( (int) (velMaxima*convertaVelicidadAF) );
-        SliderVelocidadFisico.setValue( (int)velDefault*convertaVelicidadAF );
+        SliderVelocidadFisico.setValue( (int)((float)velDefault*convertaVelicidadAF) );
         sliderToFloat(SliderVelocidadFisico, LabelVelocidadAgenteFisico, convertaVelicidadAF);
     }
     
