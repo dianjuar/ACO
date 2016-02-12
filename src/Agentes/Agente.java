@@ -114,13 +114,13 @@ public abstract class Agente
         
         if(posiblesCaminos.isEmpty())            
         {
-            caminarYdepositar(girar180(mirada));
+            caminarYGuardarPaso(girar180(mirada));
         }
         else        
         {
             if(posiblesCaminos.size() == 1)
             {
-                caminarYdepositar(posiblesCaminos.get(0).getDondeQueda());
+                caminarYGuardarPaso(posiblesCaminos.get(0).getDondeQueda());
             }
             else
             {
@@ -143,21 +143,21 @@ public abstract class Agente
                {
                     if(i==0 && NumeroAleatorio < lineaDeProb[i])
                     {   
-                       caminarYdepositar(posiblesCaminos.get(i).getDondeQueda());
+                       caminarYGuardarPaso(posiblesCaminos.get(i).getDondeQueda());
                        //AlternarPuntoObjetivo();
                     }
                     else
                     {
                         if(i== lineaDeProb.length - 1 &&  NumeroAleatorio >= lineaDeProb[i] )
                         {
-                           caminarYdepositar(posiblesCaminos.get( posiblesCaminos.size()-1 ).getDondeQueda());
+                           caminarYGuardarPaso(posiblesCaminos.get( posiblesCaminos.size()-1 ).getDondeQueda());
                            //AlternarPuntoObjetivo();
                         }
                         else
                         {
                             if( NumeroAleatorio >= lineaDeProb[i] && NumeroAleatorio < lineaDeProb[i+1] )
                             {
-                                caminarYdepositar(posiblesCaminos.get(i+1).getDondeQueda());
+                                caminarYGuardarPaso(posiblesCaminos.get(i+1).getDondeQueda());
                                 //AlternarPuntoObjetivo();
                             }
                         }
@@ -252,7 +252,7 @@ public abstract class Agente
        return posibleMovimiento;
    }
     
-     protected ArrayList<ArcoVecino> getPosiblesArcos()
+    protected ArrayList<ArcoVecino> getPosiblesArcos()
     {
         if(mirada == -1)
             return posActual.getListaArcosVecinos();
@@ -277,7 +277,7 @@ public abstract class Agente
         return ret;
     }
     
-    protected void caminarYdepositar(int mirada)
+    protected void caminarYGuardarPaso(int mirada)
     {
         this.mirada = mirada;
         CuadroMapa proximoMovimiento = haciaDondeLlegoSiAvanzoEnXDireccion(mirada);
