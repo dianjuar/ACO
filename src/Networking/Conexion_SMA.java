@@ -28,6 +28,8 @@ public class Conexion_SMA extends DataServer
     private float VelocidadMaxima;
     private float VelocidadInicial;
     
+    private String infoMap;
+    
     public Conexion_SMA(JLabel estado, InicioRobots_RecepsionDeDatos i) 
     {
         super(Puertos.Recibe_SMA, "conexion con SMA");
@@ -50,6 +52,8 @@ public class Conexion_SMA extends DataServer
             Nagentes = Integer.valueOf( vec[0].split(Encabezado_Mensajes.Msj_PInicio_SMAtoACO_HowMany)[1] );
             VelocidadMaxima = Float.valueOf( vec[1].split(Encabezado_Mensajes.Msj_PInicio_SMAtoACO_VelMax)[1] )/100;
             VelocidadInicial = Float.valueOf( vec[2].split(Encabezado_Mensajes.Msj_PInicio_SMAtoACO_VelIni)[1] )/100;
+            
+            enviarInformacionEntornoGrafico(infoMap);
             
             Tools.GestionLabels.CambiarLabel_correcto25x25(estado);
             recepsionDeDatos.faseCompletada();
@@ -100,6 +104,11 @@ public class Conexion_SMA extends DataServer
         D_s.enviar( Encabezado_Mensajes.Msj_ACotoSMA_Inicio );
     }
     
+    public void enviarInformacionEntornoGrafico(String msj)
+    {
+        D_s.enviar( Encabezado_Mensajes.Msj_ACOtoSMA_EnviromentInfo  + Encabezado_Mensajes.Msj_divisor + msj);
+    }
+    
     private boolean isAgenteNuevo(int ID)
     {
         for (AgenteFisico aFisico : FormRobots.aFisico) 
@@ -119,6 +128,11 @@ public class Conexion_SMA extends DataServer
 
     public float getVelocidadInicial() {
         return VelocidadInicial;
+    }
+
+    void setInforGrafica(String infoMap) 
+    {
+        this.infoMap = infoMap;
     }
 
 }

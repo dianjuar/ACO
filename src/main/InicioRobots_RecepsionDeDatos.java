@@ -6,8 +6,8 @@ import Networking.base.Puertos;
 
 public class InicioRobots_RecepsionDeDatos extends javax.swing.JFrame 
 {
-    private ResepcionDatos_VisionArtificial resMapa;
-    private Conexion_SMA cSMA;
+    public ResepcionDatos_VisionArtificial resMapa;
+    public Conexion_SMA cSMA;
     public static int NfasesCompletadas;
 
     

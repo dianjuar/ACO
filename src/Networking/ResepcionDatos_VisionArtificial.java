@@ -22,10 +22,9 @@ public class ResepcionDatos_VisionArtificial extends DataServer
     private float distanciaEntreCuadros;
     private JLabel etapa;
     
-    private static final String Prefijo_Mat = "Mat";
-    private static final String Prefijo_Dist = "Dist";
-    
     private InicioRobots_RecepsionDeDatos recepsionDeDatos;
+    
+    private String infoMap;
 
     public int[][] getINT_mat() {
         return INT_mat;
@@ -50,21 +49,20 @@ public class ResepcionDatos_VisionArtificial extends DataServer
         
         String Mat,dist;
         
-        if(vec[0].contains(Prefijo_Mat) == true)
-        {
-            Mat = vec[0].split(Prefijo_Mat)[1];
-            dist = vec[1].split(Prefijo_Dist)[1];
-        }
-        else
-        {
-            Mat = vec[1].split(Prefijo_Mat)[1];
-            dist = vec[0].split(Prefijo_Dist)[1];
-        }
-        
+        Mat = vec[0];
+        dist = vec[1];
+      
         cerrarConexioServer();
         
         construir_IntMat(Mat);
         distanciaEntreCuadros = Float.valueOf(dist);
+        
+        infoMap = msj;
+        
+        if(recepsionDeDatos.cSMA.isConnected())
+            recepsionDeDatos.cSMA.enviarInformacionEntornoGrafico(msj);
+        else
+            recepsionDeDatos.cSMA.setInforGrafica(infoMap);
         
         System.out.println(INT_mat);
         System.out.println("****************");

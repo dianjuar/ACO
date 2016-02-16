@@ -22,10 +22,15 @@ public abstract class DataServer extends Thread
     private boolean pararHilo;
     
     
+    private boolean connected;
+    
+    
     public DataServer(int puerto, String nombreConexion) 
     {        
         this.puerto = puerto; 
         this.nombreConexion = nombreConexion;
+        
+        connected = false;
         
         pararHilo = false;
         
@@ -63,6 +68,8 @@ public abstract class DataServer extends Thread
         this.resume();
     }
     
+    public boolean isConnected(){ return connected; }
+    
     public void run()
     {
         while(!pararHilo)
@@ -73,7 +80,8 @@ public abstract class DataServer extends Thread
             try 
             {
                 socket = Ssocket.accept();
-
+                connected = true;
+                
                 System.out.println("Conectado");
 
                 D_s = new DataSend(socket);

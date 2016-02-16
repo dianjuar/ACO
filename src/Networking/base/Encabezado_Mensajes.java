@@ -26,4 +26,7 @@ public class Encabezado_Mensajes
     public static final String Msj_ACOtoSMA_setVelocidad = "SVel";
     public static final String Msj_ACotoSMA_Inicio = "inicio";
     
+    public static final String Msj_ACOtoSMA_EnviromentInfo = "EnvInfo";
+            
+    
 }
