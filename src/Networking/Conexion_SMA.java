@@ -36,6 +36,8 @@ public class Conexion_SMA extends DataServer
         
         this.estado = estado;        
         this.recepsionDeDatos = i;
+        
+        infoMap = null;
     }
 
     @Override
@@ -53,7 +55,8 @@ public class Conexion_SMA extends DataServer
             VelocidadMaxima = Float.valueOf( vec[1].split(Encabezado_Mensajes.Msj_PInicio_SMAtoACO_VelMax)[1] )/100;
             VelocidadInicial = Float.valueOf( vec[2].split(Encabezado_Mensajes.Msj_PInicio_SMAtoACO_VelIni)[1] )/100;
             
-            enviarInformacionEntornoGrafico(infoMap);
+            if(infoMap != null)
+                enviarInformacionEntornoGrafico(infoMap);
             
             Tools.GestionLabels.CambiarLabel_correcto25x25(estado);
             recepsionDeDatos.faseCompletada();

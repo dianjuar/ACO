@@ -45,7 +45,7 @@ public class ResepcionDatos_VisionArtificial extends DataServer
     @Override
     public void AnalizadorDeMensajesSERVER(String msj) 
     {
-        String vec[] = msj.split( Encabezado_Mensajes.Msj_divisor );
+        String vec[] = msj.split( Encabezado_Mensajes.Msj_divisor_2 );
         
         String Mat,dist;
         
@@ -58,11 +58,10 @@ public class ResepcionDatos_VisionArtificial extends DataServer
         distanciaEntreCuadros = Float.valueOf(dist);
         
         infoMap = msj;
+        recepsionDeDatos.cSMA.setInforGrafica(infoMap);
         
         if(recepsionDeDatos.cSMA.isConnected())
             recepsionDeDatos.cSMA.enviarInformacionEntornoGrafico(msj);
-        else
-            recepsionDeDatos.cSMA.setInforGrafica(infoMap);
         
         System.out.println(INT_mat);
         System.out.println("****************");
