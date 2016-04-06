@@ -94,6 +94,8 @@ public class Conexion_SMA extends DataServer
                 
                 unrecheablePath.add(p);
             }
+            
+            recepsionDeDatos.faseCompletada();
         }
     }
     
