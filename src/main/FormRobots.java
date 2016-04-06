@@ -6,7 +6,9 @@ import Agentes.AgenteFisico;
 import Agentes.AgenteVirtual;
 import MapaContexto.Mapa;
 import Networking.Conexion_SMA;
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -40,7 +42,8 @@ public class FormRobots extends javax.swing.JFrame
     private Conexion_SMA cSMA;
     
     public FormRobots( int NumeroDeAgentesFisicos, float VelociadMaxima, float VelocidadInicial,
-                       float DistanciaEntreCuadros, int intMat[][], Conexion_SMA cSMA)
+                       float DistanciaEntreCuadros, int intMat[][],
+                       Conexion_SMA cSMA)
     {
         this.cSMA = cSMA;
         ejecutando = false;
@@ -69,7 +72,7 @@ public class FormRobots extends javax.swing.JFrame
        
         textDistanciaEntreNodos.setText( String.valueOf( DistanciaEntreCuadros ) );
         
-        crearMapa( intMat );
+        crearMapa( intMat, cSMA.getUnrecheablePath() );
         cargarVelocidad_MaximaYDefault(VelociadMaxima, VelocidadInicial);
         
     }
@@ -764,10 +767,15 @@ public class FormRobots extends javax.swing.JFrame
         AgenteFisico.EnviarNuevaVelocidad();
     }//GEN-LAST:event_SliderVelocidadFisicoKeyReleased
 
-    private void crearMapa( int mat[][] )
+    private void crearMapa( int mat[][], Vector<Point> p )
     {
         mapa = new Mapa(mat);
         Game.setImgTamanosyEscalas( mat.length );
+        
+        for (Point pUnrecheable : p)
+            mapa.setCuadroUnrecheable( pUnrecheable );
+        
+        
     }
 
     private void cargarVelocidad_MaximaYDefault( float velMaxima, float velDefault )
