@@ -26,7 +26,7 @@ public class Simulacion extends BasicGameState
     
     private Image imgAVirtual, imgAFisico;
     private Image imgPuntoInicial, imgPuntoFinal;
-    private Image libre, obstaculo;
+    private Image libre, unrecheable, obstaculo;
     private Image imgCuadroLibreSeleccionado,imgCuadroExtremoSeleccionado;
 
     private AgenteVirtual[] aVirtual;
@@ -53,6 +53,7 @@ public class Simulacion extends BasicGameState
         fin=3;*/        
         libre = new Image( "Media\\Img\\Mapa\\libre.png" );
         obstaculo = new Image( "Media\\Img\\Mapa\\obstaculo.png" );
+        unrecheable = new Image( "Media\\Img\\Mapa\\libre-inalcansable.png" );
         imgPuntoFinal = new Image( "Media\\Img\\Mapa\\puntoFinal.png" );
         imgPuntoInicial = new Image( "Media\\Img\\Mapa\\puntoInicial.png" );
         
@@ -82,7 +83,9 @@ public class Simulacion extends BasicGameState
             {  
                 if(Game.mapa.getCuadro(j, i).getValor() == Mapa.obstaculo)                    
                     obstaculo.draw(i*imgResized, j*imgResized, imgSacale);
-                else                    
+                else if( Game.mapa.getCuadro(j, i).isUnrecheable() )
+                    unrecheable.draw(i*imgResized, j*imgResized, imgSacale);
+                else
                     libre.draw(i*imgResized, j*imgResized, imgSacale);
             }
         }

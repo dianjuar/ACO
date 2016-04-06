@@ -40,6 +40,10 @@ public class CuadroMapa
         return valor == Mapa.obstaculo;
     }
 
+    public boolean isUnrecheable() {
+        return unrecheable;
+    }
+    
     public boolean isInicio() {
         return valor == Mapa.inicio;
     }
