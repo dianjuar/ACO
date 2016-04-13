@@ -82,20 +82,23 @@ public class Conexion_SMA extends DataServer
         }
         else if( encabezado.equals(Encabezado_Mensajes.SMAtoMe_UnrecheableSteps ) )
         {
-            String vec[] = cuerpo.split( Encabezado_Mensajes.Msj_divisor_2 );
-            
-            //each unrecheable step X#X
-            for (int i = 0; i < vec.length; i++)
+            if( !cuerpo.equals( Encabezado_Mensajes.SMAtoMe_NONEUnrecheableSteps ) )
             {
-                int x = Integer.valueOf( vec[i].split( Encabezado_Mensajes.Msj_divisor_3 )[0] );
-                int y = Integer.valueOf( vec[i].split( Encabezado_Mensajes.Msj_divisor_3 )[1] );
-                
-                Point p = new Point( x, y);
-                
-                unrecheablePath.add(p);
+                String vec[] = cuerpo.split( Encabezado_Mensajes.Msj_divisor_2 );
+
+                //each unrecheable step X#X
+                for (int i = 0; i < vec.length; i++)
+                {
+                    int x = Integer.valueOf( vec[i].split( Encabezado_Mensajes.Msj_divisor_3 )[0] );
+                    int y = Integer.valueOf( vec[i].split( Encabezado_Mensajes.Msj_divisor_3 )[1] );
+
+                    Point p = new Point( x, y);
+
+                    unrecheablePath.add(p);
+                }
             }
-            
             recepsionDeDatos.faseCompletada();
+            
         }
     }
     
