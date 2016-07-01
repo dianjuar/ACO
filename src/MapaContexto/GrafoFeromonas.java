@@ -204,11 +204,35 @@ public class GrafoFeromonas //extends Thread
         return nuemroArcosValidos;
     }
     
+
+	/***
+     *
+     * @param delta. Tiempo en que entró por última vez a la funcion expresado en milisegundos.
+     * @throws SlickException 
+     */
     public void updateFeromonas(int deltaTime) throws SlickException 
     {
+    	//Acumdelta es un acumulador para saber cuando ha pasado 1 segundo
+        //1000ms = 1seg
         int exedenteDeltaTime= -1;
-        
+
         if(acumDeltaTime >= 1000)
+    /***
+     * 
+     * @param delta. Tiempo en que entró por última vez a la funcion expresado en milisegundos.
+     * @throws SlickException 
+     */
+    public void updateFeromonas(int delta) throws SlickException 
+    {
+        //Acumdelta es un acumulador para saber cuando ha pasado 1 segundo
+        //1000ms = 1seg
+
+        int exedenteDelta= -1;
+        
+        /***
+         * Dado el caso que se pegue algo y demore en entrar más de 1segundo
+         */
+        if(acumDelta >= 1000)
         {
             exedenteDeltaTime = acumDeltaTime-1000;
             acumDeltaTime = 0;
@@ -229,22 +253,4 @@ public class GrafoFeromonas //extends Thread
         
         acumDeltaTime += deltaTime; 
     }
-    
-    /*public void run()
-    {
-        
-        while(true)
-        {
-            
-            for (ArcoGrafoFeromona ArcoValido : listaArcosValidos) {
-                ArcoValido.setFeromona(CalculosACO.evaporarFeromona(ArcoValido.getFeromona()));
-            }            
-                        
-            try {
-                sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(ArcoGrafoFeromona.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }*/
 }
