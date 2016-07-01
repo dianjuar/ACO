@@ -214,7 +214,6 @@ public class GrafoFeromonas //extends Thread
     {
         //Acumdelta es un acumulador para saber cuando ha pasado 1 segundo
         //1000ms = 1seg
-
         int exedenteDeltaTime= -1;
         
         /***
@@ -224,9 +223,17 @@ public class GrafoFeromonas //extends Thread
         {
             exedenteDeltaTime = acumDeltaTime-1000;
             acumDeltaTime = 0;
+            
+            for (ArcoGrafoFeromona ArcoValido : listaArcosValidos)
+            {
+                ArcoValido.setFeromona( CalculosACO.evaporarFeromona( ArcoValido.getFeromona() ) );
+            
+                if(ArcoValido.getFeromona() <= 0)
+                    ArcoValido.setFeromona( (float) 0.00000001);
+            }
         }
             
-        for (ArcoGrafoFeromona ArcoValido : listaArcosValidos) 
+        /*for (ArcoGrafoFeromona ArcoValido : listaArcosValidos) 
         {
             ArcoValido.setDeltaFeromona( CalculosACO.evaporarFeromona( ArcoValido.getFeromona() ) );
             
@@ -236,8 +243,8 @@ public class GrafoFeromonas //extends Thread
             ArcoValido.setFeromona( ArcoValido.getDeltaFeromona()*deltaTime/1000 );   
             
             if(ArcoValido.getFeromona() <= 0)
-                ArcoValido.setFeromona(Float.MIN_VALUE);
-        }
+                ArcoValido.setFeromona( (float) 0.00000001);
+        }*/
         
         acumDeltaTime += deltaTime; 
     }

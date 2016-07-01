@@ -84,7 +84,7 @@ public class ArcoGrafoFeromona
     }
 
     public void setFeromona(float feromona) {
-        this.feromona = this.feromona - feromona;
+        this.feromona = /*this.feromona - */feromona;
     }
 
     /** Indica si el arco es verticalm horizontal, diagonal positivo o doagonal negativo*/

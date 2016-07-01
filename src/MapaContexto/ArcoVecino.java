@@ -6,7 +6,7 @@ public class ArcoVecino
 {
     private final ArcoGrafoFeromona ArcoVecino;
     private final int dondeQueda;
-    private float probabilidad;
+    private double probabilidad;
     private final String stringDondeQueda;
 
     public ArcoVecino(ArcoGrafoFeromona ArcoVecino, int dondeQueda) {
@@ -58,11 +58,11 @@ public class ArcoVecino
         return dondeQueda;
     }
 
-    public void setProbabilidad(float provabilidad) {
+    public void setProbabilidad(double provabilidad) {
         this.probabilidad = provabilidad;
     }
 
-    public float getProbabilidad() {
+    public double getProbabilidad() {
         return probabilidad;
     }
 

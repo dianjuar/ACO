@@ -39,7 +39,7 @@ public class CalculosACO
         
         for (int i = 0; i < list.size(); i++) 
         {
-            list.get(i).setProbabilidad( numerodores[i] / denominador);
+            list.get(i).setProbabilidad( (double) (numerodores[i] / denominador));
             
             if(debug)
             {
