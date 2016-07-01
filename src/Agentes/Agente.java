@@ -254,7 +254,7 @@ public abstract class Agente
     
     protected ArrayList<ArcoVecino> getPosiblesArcos()
     {
-        if(mirada == -1)
+        if(mirada == -1 || posActual ==  Mapa.cuadroInicial || posActual == Mapa.cuadroFinal)
             return posActual.getListaArcosVecinos();
         
         ArrayList<ArcoVecino> ret = new ArrayList<>();
