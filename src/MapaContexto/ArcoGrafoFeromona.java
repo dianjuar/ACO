@@ -12,9 +12,14 @@ public class ArcoGrafoFeromona
     
     private final int idPuntoA, idPuntoB;
     
+    /**
+     * Representa cuanta feromona se evaporará en 1 un segundo.
+     */
     private float deltaFeromona;
     
-    /** Indica si el arco es verticalm horizontal, diagonal positivo o doagonal negativo*/
+    /**
+     * Indica si el arco es verticalm horizontal, diagonal positivo o doagonal negativo
+     */
     private final int tipoDeArco;
     
     private final boolean isHorizontalOVertical;
@@ -41,12 +46,20 @@ public class ArcoGrafoFeromona
             isHorizontalOVertical = false;
     }
 
+    /**  
+     * 
+     * @return el valor de deltaFeromona
+     */
     public float getDeltaFeromona() {
         return deltaFeromona;
     }
 
+    /**
+     * 
+     * @param deltaFeromona el valor de deltaFeromona
+     */
     public void setDeltaFeromona(float deltaFeromona) {
-        this.deltaFeromona = deltaFeromona;
+        this.deltaFeromona = this.feromona - deltaFeromona;
     }
     
     public void agregarFeromona(float feromonaNueva)
@@ -71,7 +84,7 @@ public class ArcoGrafoFeromona
     }
 
     public void setFeromona(float feromona) {
-        this.feromona = feromona;
+        this.feromona = this.feromona - feromona;
     }
 
     /** Indica si el arco es verticalm horizontal, diagonal positivo o doagonal negativo*/
