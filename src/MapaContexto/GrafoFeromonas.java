@@ -23,13 +23,13 @@ public class GrafoFeromonas //extends Thread
     public static final int arcoDiagonalPositivo = 2;
     public static final int arcoDiagonalNegativo = 3;
     
-    private int acumDelta;
+    private int acumDeltaTime;
     
     public GrafoFeromonas(int tamano, int cantidadDeHormigas, CuadroMapa mapa[][]) 
     {
         this.tamano = tamano;
         this.mapa = mapa;
-        acumDelta = 0;
+        acumDeltaTime = 0;
         
         grafo = new ArcoGrafoFeromona[tamano*tamano][tamano*tamano];
         float feromonaInicial = feromonaInicial(cantidadDeHormigas);
@@ -204,33 +204,30 @@ public class GrafoFeromonas //extends Thread
         return nuemroArcosValidos;
     }
     
-    public void updateFeromonas(GameContainer container, StateBasedGame game, int delta) throws SlickException 
+    public void updateFeromonas(int deltaTime) throws SlickException 
     {
-        int exedenteDelta= -1;
+        int exedenteDeltaTime= -1;
         
-        
-        if(acumDelta >= 1000)
+        if(acumDeltaTime >= 1000)
         {
-            exedenteDelta = 1000-(acumDelta - delta);
-            delta = delta -exedenteDelta;
-            acumDelta = 0;
+            exedenteDeltaTime = acumDeltaTime-1000;
+            acumDeltaTime = 0;
         }
             
         for (ArcoGrafoFeromona ArcoValido : listaArcosValidos) 
         {
-            if(acumDelta == 0)
-            {
-                ArcoValido.setFeromona( ArcoValido.getFeromona() - (ArcoValido.getDeltaFeromona()*exedenteDelta/1000) ); 
-                ArcoValido.setDeltaFeromona(ArcoValido.getFeromona()- CalculosACO.evaporarFeromona( ArcoValido.getFeromona() ) );
-            }
+            ArcoValido.setDeltaFeromona( CalculosACO.evaporarFeromona( ArcoValido.getFeromona() ) );
             
-            ArcoValido.setFeromona( ArcoValido.getFeromona() - (ArcoValido.getDeltaFeromona()*delta/1000) );   
+            if(acumDeltaTime == 0)            
+                ArcoValido.setFeromona(  ArcoValido.getDeltaFeromona()*exedenteDeltaTime/1000 );
             
-                if(ArcoValido.getFeromona() <= 0)
-                    ArcoValido.setFeromona(Float.MIN_VALUE);
+            ArcoValido.setFeromona( ArcoValido.getDeltaFeromona()*deltaTime/1000 );   
+            
+            if(ArcoValido.getFeromona() <= 0)
+                ArcoValido.setFeromona(Float.MIN_VALUE);
         }
         
-        acumDelta += delta; 
+        acumDeltaTime += deltaTime; 
     }
     
     /*public void run()
