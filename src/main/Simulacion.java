@@ -91,7 +91,9 @@ public class Simulacion extends BasicGameState
         renderPuntosFinalIncial();        
         renderCuadrosSeleccionados(g);
         renderAgentesVirtuales(imgAVirtual, imgResized, imgSacale);
-        renderAgentesFisicos(imgAFisico, imgResized, imgSacale);
+        
+        if( aFisico != null )
+            renderAgentesFisicos(imgAFisico, imgResized, imgSacale);
         
     }
     
@@ -185,10 +187,11 @@ public class Simulacion extends BasicGameState
         for (AgenteVirtual aVir : aVirtual) 
             aVir.update(container, game, delta, AgenteVirtual.velocidad);
         
-        for (AgenteFisico aFis : aFisico ) 
-            aFis.update(container, game, delta, AgenteFisico.velocidad);
+        if( aFisico != null )
+            for (AgenteFisico aFis : aFisico ) 
+                aFis.update(container, game, delta, AgenteFisico.velocidad);
         
-        Game.mapa.getGrafoFeromonas().updateFeromonas(container, game, delta);
+        Game.mapa.getGrafoFeromonas().updateFeromonas(delta);
         
         if(container.getInput().isMousePressed( Input.MOUSE_LEFT_BUTTON ))
         {
