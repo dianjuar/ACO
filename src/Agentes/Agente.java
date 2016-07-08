@@ -257,6 +257,10 @@ public abstract class Agente
         if(mirada == -1)
             return posActual.getListaArcosVecinos();
         
+        //retornar todos los posibles caminos al llegar al inicio o al final
+        if( posActual.isFin() || posActual.isInicio() )
+            return posActual.getListaArcosVecinos();
+        
         ArrayList<ArcoVecino> ret = new ArrayList<>();
         
         

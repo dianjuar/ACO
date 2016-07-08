@@ -140,8 +140,9 @@ public class Simulacion extends BasicGameState
     
     private void renderAgentesFisicos(Image imgAFisico, float imgResized, float imgSacale) throws SlickException 
     {
-        for (AgenteFisico Afis : aFisico) 
-            Afis.render(imgAFisico, imgResized, imgSacale);
+        if( aFisico != null )
+            for (AgenteFisico Afis : aFisico) 
+                Afis.render(imgAFisico, imgResized, imgSacale);
     }
     
     private void renderArcosFeromona()
@@ -188,8 +189,9 @@ public class Simulacion extends BasicGameState
         for (AgenteVirtual aVir : aVirtual) 
             aVir.update(container, game, delta, AgenteVirtual.velocidad);
         
-        for (AgenteFisico aFis : aFisico ) 
-            aFis.update(container, game, delta, AgenteFisico.velocidad);
+        if( aFisico != null )
+            for (AgenteFisico aFis : aFisico ) 
+                aFis.update(container, game, delta, AgenteFisico.velocidad);
         
         Game.mapa.getGrafoFeromonas().updateFeromonas(container, game, delta);
         
