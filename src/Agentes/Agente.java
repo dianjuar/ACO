@@ -254,7 +254,7 @@ public abstract class Agente
     
     protected ArrayList<ArcoVecino> getPosiblesArcos()
     {
-        if(mirada == -1 || posActual ==  Mapa.cuadroInicial || posActual == Mapa.cuadroFinal)
+        if(mirada == -1)
             return posActual.getListaArcosVecinos();
         
         //retornar todos los posibles caminos al llegar al inicio o al final
