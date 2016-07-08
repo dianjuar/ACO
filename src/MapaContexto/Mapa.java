@@ -1,7 +1,6 @@
 package MapaContexto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.Point;
 
 public class Mapa
 {
@@ -111,6 +110,11 @@ public class Mapa
                 }
             }
         }
+    }
+
+    public void setCuadroUnrecheable(Point p) 
+    {
+        mapa[p.y][p.x].setUnrecheable();
     }
     
 }

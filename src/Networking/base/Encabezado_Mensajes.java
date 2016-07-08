@@ -13,20 +13,25 @@ public class Encabezado_Mensajes
 {
     public static final String Msj_divisor = "->";
         public static final String Msj_divisor_2 = "_";   
-        
+        public static final String Msj_divisor_3 = "#";
+
     public static final String Msj_cerrar = "close";
     public static final String Msj_conectado = "connect"; 
     public static final String Msj_nextStep = "nextS";
+    public static final String SMAtoMe_UnrecheableSteps = "unrSteps";
     
     public static final String Msj_PInicio_SMAtoACO = "iniSMA2ACO";
         public static final String Msj_PInicio_SMAtoACO_HowMany = "HowMany";
         public static final String Msj_PInicio_SMAtoACO_VelMax = "VelMax";
         public static final String Msj_PInicio_SMAtoACO_VelIni = "VelIni";
         
+        
     public static final String Msj_ACOtoSMA_setVelocidad = "SVel";
     public static final String Msj_ACotoSMA_Inicio = "inicio";
     
     public static final String Msj_ACOtoSMA_EnviromentInfo = "EnvInfo";
+    public static Object SMAtoMe_NONEUnrecheableSteps = "NONEunrSteps";
+    
             
     
 }

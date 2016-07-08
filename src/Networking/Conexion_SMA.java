@@ -11,6 +11,7 @@ import Networking.base.Encabezado_Mensajes;
 import Networking.base.Puertos;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Vector;
 import main.InicioRobots_RecepsionDeDatos;
 import javax.swing.JLabel;
 import main.FormRobots;
@@ -30,16 +31,25 @@ public class Conexion_SMA extends DataServer
     
     private String infoMap;
     
+    private Vector<Point> unrecheablePath;
+    
     public Conexion_SMA(JLabel estado, InicioRobots_RecepsionDeDatos i) 
     {
         super(Puertos.Recibe_SMA, "conexion con SMA");
         
         this.estado = estado;        
         this.recepsionDeDatos = i;
+       
+        unrecheablePath = new Vector<Point>();
         
         infoMap = null;
     }
 
+    public Vector<Point> getUnrecheablePath() 
+    {
+        return unrecheablePath;
+    }
+    
     @Override
     public void AnalizadorDeMensajesSERVER(String msj) 
     {  
@@ -69,6 +79,26 @@ public class Conexion_SMA extends DataServer
                 FormRobots.aFisico.add( new AgenteFisico( robotID, this ) );
             
             calcularNuevosMovimientos(robotID);
+        }
+        else if( encabezado.equals(Encabezado_Mensajes.SMAtoMe_UnrecheableSteps ) )
+        {
+            if( !cuerpo.equals( Encabezado_Mensajes.SMAtoMe_NONEUnrecheableSteps ) )
+            {
+                String vec[] = cuerpo.split( Encabezado_Mensajes.Msj_divisor_2 );
+
+                //each unrecheable step X#X
+                for (int i = 0; i < vec.length; i++)
+                {
+                    int x = Integer.valueOf( vec[i].split( Encabezado_Mensajes.Msj_divisor_3 )[0] );
+                    int y = Integer.valueOf( vec[i].split( Encabezado_Mensajes.Msj_divisor_3 )[1] );
+
+                    Point p = new Point( x, y);
+
+                    unrecheablePath.add(p);
+                }
+            }
+            recepsionDeDatos.faseCompletada();
+            
         }
     }
     

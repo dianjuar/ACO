@@ -8,7 +8,9 @@ public class CuadroMapa
     private final int valor;
     private final int x,y;
     private final int ID;
+    
     private final ArrayList<ArcoVecino> listaArcosVecinos;
+    private boolean unrecheable;
     
     public CuadroMapa (int valor,int x, int y, int ID)
     {
@@ -16,12 +18,18 @@ public class CuadroMapa
         this.ID = ID;
         this.x = x;
         this.y = y;
+        unrecheable = false;
         
         if(valor != Mapa.obstaculo)
         listaArcosVecinos = new ArrayList<>();
         else
         listaArcosVecinos = null;
     }    
+    
+    public void setUnrecheable()
+    {
+        unrecheable = true;
+    }
     
     public void agregarArcoVecino(ArcoVecino arco)
     {
@@ -32,6 +40,10 @@ public class CuadroMapa
         return valor == Mapa.obstaculo;
     }
 
+    public boolean isUnrecheable() {
+        return unrecheable;
+    }
+    
     public boolean isInicio() {
         return valor == Mapa.inicio;
     }

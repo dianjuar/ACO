@@ -26,7 +26,7 @@ public class InicioRobots_RecepsionDeDatos extends javax.swing.JFrame
     {
         NfasesCompletadas++;
         
-        if( NfasesCompletadas == 2)
+        if( NfasesCompletadas == 3)
         {
             this.dispose();
             new FormRobots( cSMA.getNagentes(), 

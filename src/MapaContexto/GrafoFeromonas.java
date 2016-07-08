@@ -100,6 +100,9 @@ public class GrafoFeromonas //extends Thread
         if( mapa[b.y][b.x].isObstaculo() || mapa[a.y][a.x].isObstaculo())
             return false;
         
+        if( mapa[b.y][b.x].isUnrecheable() || mapa[a.y][a.x].isUnrecheable() )
+            return false;
+        
         if(a.x-b.x ==0  && a.y-b.y ==0)
             return false;
         
