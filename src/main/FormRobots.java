@@ -41,6 +41,8 @@ public class FormRobots extends javax.swing.JFrame
     
     private Conexion_SMA cSMA;
     
+    private ACOparManager ACOpM;
+    
     public FormRobots( int NumeroDeAgentesFisicos, float VelociadMaxima, float VelocidadInicial,
                        float DistanciaEntreCuadros, int intMat[][],
                        Conexion_SMA cSMA)
@@ -52,6 +54,8 @@ public class FormRobots extends javax.swing.JFrame
         aFisico = new ArrayList<>();
         
         initComponents();  
+        
+        ACOpM = new ACOparManager();
         
         try 
         {
@@ -137,6 +141,8 @@ public class FormRobots extends javax.swing.JFrame
         jLabel21 = new javax.swing.JLabel();
         SliderQ = new javax.swing.JSlider();
         LabelQ = new javax.swing.JLabel();
+        loadACOValuesB_last = new javax.swing.JButton();
+        loadACOValuesB_default = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         textDistanciaEntreNodos = new javax.swing.JTextField();
@@ -352,7 +358,7 @@ public class FormRobots extends javax.swing.JFrame
         );
         parametrosAgentesLayout.setVerticalGroup(
             parametrosAgentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         jPanel7.setBackground(new java.awt.Color(197, 197, 197));
@@ -561,6 +567,23 @@ public class FormRobots extends javax.swing.JFrame
 
         jSplitPane1.setRightComponent(jPanel4);
 
+        loadACOValuesB_last.setBackground(new java.awt.Color(254, 254, 254));
+        loadACOValuesB_last.setForeground(new java.awt.Color(37, 137, 255));
+        loadACOValuesB_last.setText("Configuracion Previa");
+        loadACOValuesB_last.setOpaque(true);
+        loadACOValuesB_last.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadACOValuesB_lastActionPerformed(evt);
+            }
+        });
+
+        loadACOValuesB_default.setText("Configuracion Default");
+        loadACOValuesB_default.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadACOValuesB_defaultActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -568,12 +591,22 @@ public class FormRobots extends javax.swing.JFrame
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jSplitPane1)
                 .addContainerGap())
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(loadACOValuesB_last)
+                .addGap(18, 18, 18)
+                .addComponent(loadACOValuesB_default)
+                .addGap(26, 26, 26))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loadACOValuesB_last)
+                    .addComponent(loadACOValuesB_default))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel8.setBackground(new java.awt.Color(197, 197, 197));
@@ -627,19 +660,19 @@ public class FormRobots extends javax.swing.JFrame
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
+                    .addComponent(Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
+                                .addGap(82, 82, 82)
                                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(parametrosAgentes, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                             .addComponent(BotonEmpezarSimulacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 12, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -649,23 +682,23 @@ public class FormRobots extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 10, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(parametrosAgentes, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BotonEmpezarSimulacion, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(6, 6, 6))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonEmpezarSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEmpezarSimulacionActionPerformed
-        
+
         if(ejecutando)
         {
             //Se detubo la simulacion            
@@ -677,6 +710,8 @@ public class FormRobots extends javax.swing.JFrame
         }
         else
         {
+            ACOpM.saveVariables(SliderTasaDeEvaporacion, SliderAlfa, SliderBeta, SliderQ, SliderVelocidadVirtual, comboBoxNAgentesVirtual);
+            
             enviar_avisoDeInicio();
             
             cargarVariables();
@@ -767,6 +802,16 @@ public class FormRobots extends javax.swing.JFrame
         AgenteFisico.EnviarNuevaVelocidad();
     }//GEN-LAST:event_SliderVelocidadFisicoKeyReleased
 
+    private void loadACOValuesB_defaultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadACOValuesB_defaultActionPerformed
+        ACOpM.loadDefault();
+        ACOpM.loadSliders(SliderTasaDeEvaporacion, SliderAlfa, SliderBeta, SliderQ, SliderVelocidadVirtual, comboBoxNAgentesVirtual);
+    }//GEN-LAST:event_loadACOValuesB_defaultActionPerformed
+
+    private void loadACOValuesB_lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadACOValuesB_lastActionPerformed
+       if( ACOpM.loadStoredVaraibles() )
+            ACOpM.loadSliders(SliderTasaDeEvaporacion, SliderAlfa, SliderBeta, SliderQ, SliderVelocidadVirtual, comboBoxNAgentesVirtual);
+    }//GEN-LAST:event_loadACOValuesB_lastActionPerformed
+
     private void crearMapa( int mat[][], Vector<Point> p )
     {
         mapa = new Mapa(mat);
@@ -831,6 +876,8 @@ public class FormRobots extends javax.swing.JFrame
     private javax.swing.JSplitPane jSplitPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField_NAgentes_Fisicos;
+    private javax.swing.JButton loadACOValuesB_default;
+    private javax.swing.JButton loadACOValuesB_last;
     private javax.swing.JPanel panelSimulacion;
     private javax.swing.JPanel parametrosAgentes;
     private javax.swing.JTextField textDistanciaEntreNodos;
