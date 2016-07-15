@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,6 +33,8 @@ public class FormSimulacion extends javax.swing.JFrame
     
     private JFileChooser fc;
     private final String extesionDeLosMapas;
+    
+    private ACOparManager ACOpM;
         
     public FormSimulacion()
     {
@@ -40,6 +43,8 @@ public class FormSimulacion extends javax.swing.JFrame
         stop = new javax.swing.ImageIcon(getClass().getResource("/Media/Img/PanelDeControl/stop.png"));
         
         initComponents();        
+        
+        ACOpM = new ACOparManager();
         
         try {
             cargarSimulacion();
@@ -90,6 +95,8 @@ public class FormSimulacion extends javax.swing.JFrame
         jLabel16 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator1 = new javax.swing.JSeparator();
+        loadACOValuesB_default = new javax.swing.JButton();
+        loadACOValuesB_last = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         LabelDistanciaHEntreNodos = new javax.swing.JLabel();
@@ -300,17 +307,46 @@ public class FormSimulacion extends javax.swing.JFrame
                 .addContainerGap())
         );
 
+        loadACOValuesB_default.setText("Configuracion Default");
+        loadACOValuesB_default.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadACOValuesB_defaultActionPerformed(evt);
+            }
+        });
+
+        loadACOValuesB_last.setBackground(new java.awt.Color(254, 254, 254));
+        loadACOValuesB_last.setForeground(new java.awt.Color(37, 137, 255));
+        loadACOValuesB_last.setText("Configuracion Previa");
+        loadACOValuesB_last.setOpaque(true);
+        loadACOValuesB_last.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadACOValuesB_lastActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(loadACOValuesB_last)
+                        .addGap(18, 18, 18)
+                        .addComponent(loadACOValuesB_default)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loadACOValuesB_last)
+                    .addComponent(loadACOValuesB_default))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel13.getAccessibleContext().setAccessibleName("");
@@ -396,7 +432,7 @@ public class FormSimulacion extends javax.swing.JFrame
                 .addComponent(SliderDistanciaEntreNodos, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelDistanciaHEntreNodos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addContainerGap())
         );
@@ -621,8 +657,8 @@ public class FormSimulacion extends javax.swing.JFrame
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(16, 16, 16)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(parametrosAgentes, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -652,7 +688,9 @@ public class FormSimulacion extends javax.swing.JFrame
             }
             else
             {
-                cargarVariables();            
+                cargarVariables();          
+                ACOpM.saveVariables(SliderTasaDeEvaporacion, SliderAlfa, SliderBeta, SliderQ, SliderVelocidadVirtual, SliderNumeroDeAgentes);
+
                 BotonEmpezarSimulacion.setIcon(stop);
                 int numeroDeAgentes = SliderNumeroDeAgentes.getValue();
 
@@ -871,6 +909,16 @@ public class FormSimulacion extends javax.swing.JFrame
         
     }//GEN-LAST:event_NuevoActionPerformed
 
+    private void loadACOValuesB_lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadACOValuesB_lastActionPerformed
+        if( ACOpM.loadStoredVaraibles() )
+        ACOpM.loadSliders(SliderTasaDeEvaporacion, SliderAlfa, SliderBeta, SliderQ, SliderVelocidadVirtual, SliderNumeroDeAgentes);
+    }//GEN-LAST:event_loadACOValuesB_lastActionPerformed
+
+    private void loadACOValuesB_defaultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadACOValuesB_defaultActionPerformed
+        ACOpM.loadDefault();
+        ACOpM.loadSliders(SliderTasaDeEvaporacion, SliderAlfa, SliderBeta, SliderQ, SliderVelocidadVirtual, SliderNumeroDeAgentes);
+    }//GEN-LAST:event_loadACOValuesB_defaultActionPerformed
+
     private String matToText()
     {
         String sMat = "";
@@ -937,6 +985,8 @@ public class FormSimulacion extends javax.swing.JFrame
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JButton loadACOValuesB_default;
+    private javax.swing.JButton loadACOValuesB_last;
     private javax.swing.JPanel panelSimulacion;
     private javax.swing.JPanel parametrosAgentes;
     // End of variables declaration//GEN-END:variables

@@ -107,7 +107,7 @@ public class ACOparManager
                                 JSlider beta_jslider,
                                 JSlider q_jslider,
                                 JSlider velocidad_jslider,
-                                JComboBox nAgentes_jcomboBox)
+                                Object nAgentes_object)
     {
         changeJslider( tasaEV_jslider,  tasaEV);
 	changeJslider( alfa_jslider,  alfa);
@@ -115,7 +115,11 @@ public class ACOparManager
 	changeJslider( q_jslider,  q);
 	changeJslider( velocidad_jslider,  velocidad);
         
-        nAgentes_jcomboBox.setSelectedIndex( nAgentes );
+        if( nAgentes_object instanceof JComboBox )        
+           ((JComboBox) nAgentes_object).setSelectedIndex( nAgentes );        
+        else
+           changeJslider((JSlider) nAgentes_object,  velocidad); 
+        
     }
     
     public void saveVariables( JSlider tasaEV_jslider,
@@ -123,15 +127,25 @@ public class ACOparManager
                                 JSlider beta_jslider,
                                 JSlider q_jslider,
                                 JSlider velocidad_jslider,
-                                JComboBox nAgentes_jcomboBox)
+                                Object nAgentes_object)
     {
         
         this.tasaEV = tasaEV_jslider.getValue(); 
         this.alfa = alfa_jslider.getValue(); 
         this.beta = beta_jslider.getValue(); 
         this.q = q_jslider.getValue(); 
-        this.velocidad = velocidad_jslider.getValue(); 
-        this.nAgentes = nAgentes_jcomboBox.getSelectedIndex();
+        this.velocidad = velocidad_jslider.getValue();
+        
+        if( nAgentes_object instanceof JComboBox )
+        {
+            JComboBox nAgentes_jcombobox = (JComboBox) nAgentes_object;
+            this.nAgentes = nAgentes_jcombobox.getSelectedIndex();
+        }
+        else
+        {
+            JSlider nAgentes_jslider = (JSlider) nAgentes_object;
+            this.nAgentes = nAgentes_jslider.getValue();
+        }
         
         /*changeJslider( tasaEV_jslider,  tasaEV);
 	changeJslider( alfa_jslider,  alfa);
